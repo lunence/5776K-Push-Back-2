@@ -1,11 +1,9 @@
-#include "lemlib/chassis/trackingWheel.hpp"
 #include "main.h"
-#include "pros/motors.h"
 
 //motor definitions
-pros::Motor bottomRoller(0);
-pros::Motor topRoller(0);
-pros::Motor indexer(0);
+pros::Motor bottomRoller(0, pros::MotorGearset::blue);
+pros::Motor topRoller(0, pros::MotorGearset::green);
+pros::Motor indexer(0, pros::MotorGearset::green);
 
 pros::MotorGroup leftMotors({0, 0, 0}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({0, 0, 0}, pros::MotorGearset::blue);
@@ -79,11 +77,3 @@ lemlib::Chassis chassis(
 
 //control definitions
 pros::Controller controller(pros::E_CONTROLLER_MASTER);
-
-//init functions
-void motorInit() {
-    bottomRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    topRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    indexer.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
-}
