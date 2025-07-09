@@ -9,3 +9,6 @@ void motorInit();
 
 //screen run function
 void runScreen();
+
+//console run function
+void runConsole();
