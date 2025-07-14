@@ -50,15 +50,15 @@ void updateIntake() { //TODO: too lazy to add toggle logic but this should work,
                 controller.set_text(0, 0, "60%");
 
                 velState = 1;
-                velButtonPressed = true;
             } else if(velState == 1) {
                 velValue = 12000;
                 controller.set_text(0, 0, "100%");
 
                 velState = 0;
-                velButtonPressed = true;
             }
         }
+
+        velButtonPressed = true;
     } else {
         velButtonPressed = false;
     }

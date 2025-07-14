@@ -1,18 +1,18 @@
 #include "main.h"
 
 //motor definitions
-pros::Motor bottomRoller(0, pros::MotorGearset::blue);
-pros::Motor topRoller(0, pros::MotorGearset::green);
-pros::Motor indexer(0, pros::MotorGearset::green);
+pros::Motor bottomRoller(11, pros::MotorGearset::blue);
+pros::Motor topRoller(-12, pros::MotorGearset::blue);
+pros::Motor indexer(14, pros::MotorGearset::green);
 
-pros::MotorGroup leftMotors({0, 0, 0}, pros::MotorGearset::blue);
-pros::MotorGroup rightMotors({0, 0, 0}, pros::MotorGearset::blue);
+pros::MotorGroup leftMotors({-10, -9, -19}, pros::MotorGearset::blue);
+pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
 
 //sensor definitions
-pros::Optical color(0);
-pros::Imu imu(0);
-pros::Rotation horizRotation(0);
-pros::Rotation vertRotation(0);
+// pros::Optical color(0);
+pros::Imu imu(16);
+pros::Rotation horizRotation(18);
+pros::Rotation vertRotation(-17);
 
 //drivetrain definitions
 lemlib::TrackingWheel horizOdom(

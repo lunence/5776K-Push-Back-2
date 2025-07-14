@@ -4,7 +4,7 @@
 void motorInit() {
     bottomRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     topRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    indexer.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    indexer.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
 
@@ -18,9 +18,9 @@ void taskInit() {
 //brain task
 void runScreen() {
     while(true) {
-        pros::lcd::print(0, "X: \f", chassis.getPose().x);
-        pros::lcd::print(0, "Y: \f", chassis.getPose().y);
-        pros::lcd::print(0, "Theta: \f", chassis.getPose().theta);
+        pros::lcd::print(1, "X: \f", chassis.getPose().x);
+        pros::lcd::print(2, "Y: \f", chassis.getPose().y);
+        pros::lcd::print(3, "Theta: \f", chassis.getPose().theta);
 
         pros::delay(50);
     }
