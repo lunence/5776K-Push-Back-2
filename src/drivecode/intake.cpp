@@ -8,7 +8,7 @@ int velValue = 12000;
 bool velButtonPressed = false;
 int velState = 0;
 
-void updateIntake() { //TODO: too lazy to add toggle logic but this should work, outtake gets priority
+void updateIntake() { //TODO: add toggle logic for all
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake
         bottomState = 0;
         topState = 0;

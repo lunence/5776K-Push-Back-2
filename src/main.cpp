@@ -17,7 +17,9 @@ void on_center_button() {
 void initialize() {
 	pros::lcd::initialize();
 
-	chassis.setPose(0, 0, 0);
+	chassis.calibrate();
+	// chassis.setPose(0, 0, 0);
+
 	taskInit();
 	motorInit();
 }
