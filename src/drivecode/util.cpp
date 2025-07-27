@@ -4,7 +4,7 @@
 void motorInit() {
     bottomRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     topRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    indexer.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    indexer.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
 
@@ -32,9 +32,10 @@ void runScreen() {
 
 //console task
 void runConsole() {
-    lemlib::Pose pose = chassis.getPose();
 
     while(true) {
+        lemlib::Pose pose = chassis.getPose();
+
         std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
         std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
         std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n\n";
