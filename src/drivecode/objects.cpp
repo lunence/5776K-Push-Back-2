@@ -58,7 +58,7 @@ lemlib::ControllerSettings lateralController( //TODO: tune error zones, pids
     100,
     3,
     500,
-    20
+    0
 );
 
 lemlib::ControllerSettings angularController( //TODO: tune error zones, pids
@@ -70,7 +70,7 @@ lemlib::ControllerSettings angularController( //TODO: tune error zones, pids
     100,
     3,
     500,
-    20
+    0
 );
 
 lemlib::Chassis chassis(
