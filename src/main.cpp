@@ -36,6 +36,7 @@ void opcontrol() {
 	while (true) {
 		//subsystems
 		updateIntake();
+		updatePistons();
 		
 		//drive
 		//for single stick arcade, turn pros::E_CONTROLLER_ANALOG_RIGHT_X into pros::E_CONTROLLER_DIGITAL_LEFT_X

@@ -8,6 +8,11 @@ pros::Motor indexer(15, pros::MotorGearset::green);
 pros::MotorGroup leftMotors({-10, -9, -3}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
 
+//piston definitions
+pros::ADIDigitalOut littleWill ('A');
+pros::ADIDigitalOut hood ('B');
+pros::ADIDigitalOut trapdoor ('C');
+
 //sensor definitions
 // pros::Optical color(0);
 pros::Imu imu(16);

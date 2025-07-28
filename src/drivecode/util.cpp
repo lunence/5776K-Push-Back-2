@@ -1,4 +1,4 @@
-#include "util.hpp"
+#include "drivecode/util.hpp"
 
 //motor brake modes
 void motorInit() {
@@ -13,6 +13,7 @@ void taskInit() {
     pros::Task screenTask(runScreen, "screen task");
     pros::Task intakeTask(runIntake, "intake task");
     pros::Task consoleTask(runConsole, "console task");
+    pros::Task pistonTask(runPistons, "piston task");
 }
 
 //brain task

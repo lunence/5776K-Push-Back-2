@@ -8,6 +8,11 @@ extern pros::Motor topRoller;
 extern pros::MotorGroup leftMotors;
 extern pros::MotorGroup rightMotors;
 
+//piston declarations
+extern pros::ADIDigitalOut littleWill;
+extern pros::ADIDigitalOut hood;
+extern pros::ADIDigitalOut trapdoor;
+
 //sensor declarations
 extern pros::Optical color;
 extern pros::Imu imu;
@@ -20,6 +25,3 @@ extern lemlib::Chassis chassis;
 
 //control declarations
 extern pros::Controller controller;
-
-//init functions
-void motorInit();
