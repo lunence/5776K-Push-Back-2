@@ -13,3 +13,6 @@ void runScreen();
 
 //console run function
 void runConsole();
+
+//controller screen print function
+void runController();

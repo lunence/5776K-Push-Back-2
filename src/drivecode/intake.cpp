@@ -1,9 +1,7 @@
 #include "drivecode/intake.hpp"
 #include "drivecode/pistons.hpp"
 
-int bottomState = 0;
-int topState = 0;
-int indexState = 0;
+int intakeState = 0;
 
 int velValue = 12000;
 bool velButtonPressed = false;
@@ -12,40 +10,49 @@ bool l1Pressed = false;
 bool l2Pressed = false;
 bool r1Pressed = false;
 bool downPressed = false;
-bool rightPressed = false;
-bool yPressed = false;
 bool bPressed = false;
 
 int velState = 0;
 
 void runIntake() {
     while(true) {
-    
-        //bottom roller
-        if(bottomState == 0) { //rest
-            bottomRoller.move_velocity(0);
-        } else if (bottomState == 1) { //intake
-            bottomRoller.move_velocity(velValue);
-        } else if (bottomState == 2) { //outtake
-            bottomRoller.move_velocity(-velValue);
-        }
+        switch(intakeState) {
+            case 0: {
+                bottomRoller.move_velocity(0);
+                topRoller.move_velocity(0);
+                indexer.move_velocity(0);
+            }
 
-        //top roller
-        if(topState == 0) { //rest
-            topRoller.move_velocity(0);
-        } else if (topState == 1) { //spin forward, long goal
-            topRoller.move_velocity(velValue);
-        } else if (topState == 2) { //spin backward, mid goal / outtake
-            topRoller.move_velocity(-velValue);
-        }
+            case 1: {
+                bottomRoller.move_velocity(velValue);
+                topRoller.move_velocity(velValue);
+                indexer.move_velocity(-velValue);
+            }
 
-        //indexer
-        if(indexState == 0) {
-            indexer.move_velocity(0);
-        } else if (indexState == 1) { //index in
-            indexer.move_velocity(velValue);
-        } else if (indexState == 2) { //index out
-            indexer.move_velocity(-velValue);
+            case 2: {
+                bottomRoller.move_velocity(velValue);
+                topRoller.move_velocity(-velValue);
+                indexer.move_velocity(-velValue);
+            }
+
+            case 3: {
+                bottomRoller.move_velocity(-velValue);
+                topRoller.move_velocity(-velValue);
+                indexer.move_velocity(0);
+            }
+
+            case 4: {
+                bottomRoller.move_velocity(-velValue);
+                topRoller.move_velocity(-velValue);
+                indexer.move_velocity(-velValue);
+            }
+
+            case 5: {
+                bottomRoller.move_velocity(velValue);
+                topRoller.move_velocity(0);
+                indexer.move_velocity(velValue);
+            }
+
         }
 
         pros::delay(10);
@@ -54,126 +61,69 @@ void runIntake() {
 
 void updateIntake() {
 
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake
-        bottomState = 0;
-        topState = 0;
-        indexState = 0;
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
+        intakeState = 0;
     }
     
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
         if(!l1Pressed) {
             l1Pressed = true;
-            if (bottomState == 1 && topState == 1 && indexState == 2) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
+            if (intakeState == 1) {
+                intakeState = 0;
             } else {
-                bottomState = 1;
-                topState = 1;
-                indexState = 2;
+                intakeState = 1;
             }
         } 
     } else {
         l1Pressed = false;
     }
     
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
         if(!l2Pressed) {
             l2Pressed = true;
-            if (bottomState == 1 && topState == 2 && indexState == 2) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
+            if (intakeState == 2) {
+                intakeState = 0;
             } else {
-                bottomState = 1;
-                topState = 2;
-                indexState = 2;
+                intakeState = 2;
             }
         }
     } else {
         l2Pressed = false;
     }
     
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) { //r1, low goal
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) { //r1, low goal (standard), state 3
         if(!r1Pressed) {
             r1Pressed = true;
-            if (bottomState == 2 && topState == 2 && indexState == 0) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
+            if (intakeState == 3) {
+                intakeState = 0;
             } else {
-                bottomState = 2;
-                topState = 2;
-                indexState = 0;
+                intakeState = 3;
             }
         }
     } else {
         r1Pressed = false;
     }
         
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //down, low goal + clear bucket 
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //down, low goal (clear bucket), state 4
         if(!downPressed) {
             downPressed = true;
-            if (bottomState == 2 && topState == 2 && indexState == 2) {
-                bottomState = 0;
-                topState = 0;
+            if (intakeState == 4) {
                 indexState = 0;
             } else {
-                bottomState = 2;
-                topState = 2;
-                indexState = 2;
+                intakeState = 4;
             }
         }
     } else {
         downPressed = false;
     } 
     
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) { //right, mid goal + clear bucket
-        if(!rightPressed) {
-            rightPressed = true;
-            if (bottomState == 1 && topState == 2 && indexState == 2) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
-            } else {
-                bottomState = 1;
-                topState = 2;
-                indexState = 2;
-            }
-        }
-    } else {
-        rightPressed = false;
-    }
-    
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) { //y, long goal + clear bucket
-        if(!yPressed) {
-            yPressed = true;
-            if (bottomState == 1 && topState == 1 && indexState == 2) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
-            } else {
-                bottomState = 1;
-                topState = 1;
-                indexState = 2;
-            }
-
-        }
-    } else {
-        yPressed = false;
-    }
-    
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //b, load bucket
         if(!bPressed) {
             bPressed = true;
-            if (bottomState == 1 && topState == 0 && indexState == 1) {
-                bottomState = 0;
-                topState = 0;
-                indexState = 0;
+            if (intakeState == 5) {
+                intakeState = 0;
             } else {
-                bottomState = 1;
-                topState = 0;
-                indexState = 1;
+                intakeState = 5;
             }
         }
     } else {

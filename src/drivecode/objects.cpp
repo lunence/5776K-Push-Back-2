@@ -14,7 +14,8 @@ pros::ADIDigitalOut hood ('B');
 pros::ADIDigitalOut trapdoor ('C');
 
 //sensor definitions
-// pros::Optical color(0);
+pros::Optical upperColor(0); //TODO: fix port
+pros::Optical lowerColor(0); //TODO: fix port
 pros::Imu imu(16);
 pros::Rotation horizRotation(-19);
 pros::Rotation vertRotation(2);

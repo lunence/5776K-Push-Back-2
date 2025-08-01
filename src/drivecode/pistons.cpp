@@ -13,7 +13,7 @@ void updatePistons() {
             XPressed = true;
             if(littleWillState == 0) {
                 littleWillState = 1;
-            } else if(littleWillState = 1){
+            } else if(littleWillState == 1){
                 littleWillState = 0;
             }
         } 
@@ -27,7 +27,7 @@ void updatePistons() {
             UpPressed = true;
             if(hoodState == 0) {
                 hoodState = 1;
-            } else if (hoodState = 1){
+            } else if (hoodState == 1){
                 hoodState = 0;
             }
         }
@@ -41,19 +41,22 @@ void updatePistons() {
 }
 
 void runPistons() {
-    //little will
-    if(littleWillState == 0) {
-        littleWill.set_value(false);
-    } else if(littleWillState == 1) {
-        littleWill.set_value(true);
-    } 
-    
-    //hood
-    if(hoodState == 0) {
-        hood.set_value(false);
-    } else if(hoodState == 1) {
-        hood.set_value(true);
-    }
 
-    
+    while(true) {
+        //little will
+        if(littleWillState == 0) {
+            littleWill.set_value(false);
+        } else if(littleWillState == 1) {
+            littleWill.set_value(true);
+        } 
+        
+        //hood
+        if(hoodState == 0) {
+            hood.set_value(false);
+        } else if(hoodState == 1) {
+            hood.set_value(true);
+        }
+
+        pros::delay(10);
+    }
 }

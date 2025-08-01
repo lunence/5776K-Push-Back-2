@@ -44,3 +44,7 @@ void runConsole() {
         pros::delay(1000);
     }
 }
+
+void runController() {
+    
+}

@@ -14,7 +14,8 @@ extern pros::ADIDigitalOut hood;
 extern pros::ADIDigitalOut trapdoor;
 
 //sensor declarations
-extern pros::Optical color;
+extern pros::Optical upperColor;
+extern pros::Optical lowerColor;
 extern pros::Imu imu;
 
 //drivetrain declarations
