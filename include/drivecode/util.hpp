@@ -8,6 +8,8 @@ void taskInit();
 //set motor modes/init motors
 void motorInit();
 
+void sensorInit();
+
 //screen run function
 void runScreen();
 

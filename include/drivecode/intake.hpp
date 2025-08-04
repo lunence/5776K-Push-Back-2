@@ -3,9 +3,8 @@
 
 extern int bottomState;
 extern int topState;
-extern int indexState;
-
 extern int intakeState;
+extern int sortOutput;
 
 void updateIntake();
 void runIntake();

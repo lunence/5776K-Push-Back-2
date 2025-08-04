@@ -1,4 +1,35 @@
+#include <iostream>
 #include "drivecode/color.hpp"
+
+/*
+
+if color sort red
+    if color red
+        push wrong
+    if color blue
+        push right
+
+if color sort blue
+    if color blue
+        push wrong
+    if color red
+        push right
+
+if sort mid
+    if color right
+        if prev correct
+            dont wait
+        if prev wrong
+            wait until prev wrong outtake
+        set intake top
+    if color wrong
+        if prev wrong
+            dont wait
+        if prev correct
+            wait until prev correct scored
+        set intake mid
+
+*/
 
 int sortState = 0;
 bool sortButtonPressed = false;
@@ -70,16 +101,21 @@ void runColorSort() {
             }
         }
 
+        if(sortOutput == 0) { //output mid
+            
+        }
+
         pros::delay(10);
     }
 }
 
-void waitUntilIntaked(int number, bool color, int timeout) {
+//'R' = red, 'B' = blue
+void waitUntilIntaked(int number, char color, int timeout) {
     int timeElapsed = 0;
     int count = 0;
     bool colorDetected = false;
 
-    if(color) { //color true is red
+    if(color == 'R') {
         while(true) {
             if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20) { //if hue is red
                 if(!colorDetected) { //"toggle" logic
@@ -101,7 +137,7 @@ void waitUntilIntaked(int number, bool color, int timeout) {
         }
     }
 
-    if(!color) {
+    if(color == 'B') {
         while(true) {
             if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) { //if hue is red
                 if(!colorDetected) { //"toggle" logic

@@ -8,6 +8,11 @@ void motorInit() {
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
 
+void sensorInit() {
+    upperColor.set_led_pwm(100);
+    lowerColor.set_led_pwm(100);
+}
+
 //begin all tasks
 void taskInit() {
     pros::Task screenTask(runScreen, "screen task");

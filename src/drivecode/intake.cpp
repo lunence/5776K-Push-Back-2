@@ -1,7 +1,9 @@
+#include <iostream>
 #include "drivecode/intake.hpp"
 #include "drivecode/pistons.hpp"
 
 int intakeState = 0;
+int sortOutput; // 0 = output mid, 1 = output top, 2 = output mid score bottom?
 
 int velValue = 12000;
 bool velButtonPressed = false;
@@ -21,36 +23,44 @@ void runIntake() {
                 bottomRoller.move_velocity(0);
                 topRoller.move_velocity(0);
                 indexer.move_velocity(0);
+                break;
             }
 
             case 1: {
+                sortOutput = 0;
                 bottomRoller.move_velocity(velValue);
                 topRoller.move_velocity(velValue);
                 indexer.move_velocity(-velValue);
+                break;
             }
 
             case 2: {
+                sortOutput = 1;
                 bottomRoller.move_velocity(velValue);
                 topRoller.move_velocity(-velValue);
                 indexer.move_velocity(-velValue);
+                break;
             }
 
             case 3: {
                 bottomRoller.move_velocity(-velValue);
                 topRoller.move_velocity(-velValue);
                 indexer.move_velocity(0);
+                break;
             }
 
             case 4: {
                 bottomRoller.move_velocity(-velValue);
                 topRoller.move_velocity(-velValue);
                 indexer.move_velocity(-velValue);
+                break;
             }
 
             case 5: {
                 bottomRoller.move_velocity(velValue);
                 topRoller.move_velocity(0);
                 indexer.move_velocity(velValue);
+                break;
             }
 
         }
@@ -60,7 +70,6 @@ void runIntake() {
 }
 
 void updateIntake() {
-
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
         intakeState = 0;
     }
@@ -108,7 +117,7 @@ void updateIntake() {
         if(!downPressed) {
             downPressed = true;
             if (intakeState == 4) {
-                indexState = 0;
+                intakeState = 0;
             } else {
                 intakeState = 4;
             }
