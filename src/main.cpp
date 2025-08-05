@@ -3,6 +3,7 @@
 #include "drivecode/objects.hpp"
 #include "drivecode/util.hpp"
 #include "pros/misc.h"
+#include "drivecode/color.hpp"
 
 void on_center_button() {
 	static bool pressed = false;
@@ -30,7 +31,8 @@ void disabled() {}
 void competition_initialize() {}
 
 void autonomous() {
-	chassis.moveToPoint(0, 24, 3000);
+	chassis.turnToHeading(45, 5000);
+	//chassis.moveToPoint(0, 24, 3000);
 }
 
 void opcontrol() {
@@ -38,6 +40,7 @@ void opcontrol() {
 		//subsystems
 		updateIntake();
 		updatePistons();
+		updateColorSort();
 
 		//drive
 		//for single stick arcade, turn pros::E_CONTROLLER_ANALOG_RIGHT_X into pros::E_CONTROLLER_DIGITAL_LEFT_X

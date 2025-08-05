@@ -15,6 +15,26 @@ if color sort blue
     if color red
         push right
 
+if detect above bucket
+    prev wrong finished
+else
+    prev wrong not finished
+
+keep track of:
+first two blocks in intake
+if wrong block is above bucket
+if right block is fully scored
+
+if color right
+    if prev wrong not finished 
+        wait
+    intake bucket
+if color wrong
+    if prev right not bucket
+        wait
+    intake outake
+
+
 if sort mid
     if color right
         if prev correct
@@ -51,6 +71,14 @@ void updateColorSort() {
 
 void runColorSort() {
     while(true) {
+        // std::cout<<"red: "<<lowerColor.get_rgb().red<<"       "<<"blue: "<<lowerColor.get_rgb().blue<<"       "<<"green: "<<lowerColor.get_rgb().green<<"       \n";
+        // if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20) {
+        //     std::cout<<"red\n";
+        // } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) {
+        //     std::cout<<"blue\n";
+        // } else {
+        //     std::cout<<"none\n";
+        // }
 
         if(sortState == 0) {
             pros::delay(10);
@@ -101,9 +129,6 @@ void runColorSort() {
             }
         }
 
-        if(sortOutput == 0) { //output mid
-            
-        }
 
         pros::delay(10);
     }

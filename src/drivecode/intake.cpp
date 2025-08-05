@@ -3,7 +3,6 @@
 #include "drivecode/pistons.hpp"
 
 int intakeState = 0;
-int sortOutput; // 0 = output mid, 1 = output top, 2 = output mid score bottom?
 
 int velValue = 12000;
 bool velButtonPressed = false;
@@ -27,7 +26,6 @@ void runIntake() {
             }
 
             case 1: {
-                sortOutput = 0;
                 bottomRoller.move_velocity(velValue);
                 topRoller.move_velocity(velValue);
                 indexer.move_velocity(-velValue);
@@ -35,7 +33,6 @@ void runIntake() {
             }
 
             case 2: {
-                sortOutput = 1;
                 bottomRoller.move_velocity(velValue);
                 topRoller.move_velocity(-velValue);
                 indexer.move_velocity(-velValue);
@@ -58,7 +55,7 @@ void runIntake() {
 
             case 5: {
                 bottomRoller.move_velocity(velValue);
-                topRoller.move_velocity(0);
+                topRoller.move_velocity(-velValue); //change back to 0 if no color sort and if it affects something
                 indexer.move_velocity(velValue);
                 break;
             }

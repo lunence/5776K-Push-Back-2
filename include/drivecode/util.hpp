@@ -1,6 +1,7 @@
 #include "main.h"
 #include "intake.hpp"
 #include "pistons.hpp"
+#include "color.hpp"
 
 //begin all tasks
 void taskInit();

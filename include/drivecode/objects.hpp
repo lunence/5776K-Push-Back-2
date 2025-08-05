@@ -17,6 +17,8 @@ extern pros::ADIDigitalOut trapdoor;
 extern pros::Optical upperColor;
 extern pros::Optical lowerColor;
 extern pros::Imu imu;
+extern pros::Rotation horizRotation;
+extern pros::Rotation vertRotation;
 
 //drivetrain declarations
 extern lemlib::TrackingWheel horizOdom;
