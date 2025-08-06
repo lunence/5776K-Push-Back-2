@@ -60,6 +60,13 @@ void runIntake() {
                 break;
             }
 
+            case 6: { //color sort outtake
+                bottomRoller.move_velocity(velValue);
+                topRoller.move_velocity(-velValue);
+                indexer.move_velocity(-velValue);
+                break;
+            }
+
         }
 
         pros::delay(10);
