@@ -147,8 +147,8 @@ void updateIntake() {
         if(!velButtonPressed) {
             velButtonPressed = true;
             if(velState == 0) {
-                velValue = 12000 * 0.6;
-                controller.set_text(0, 0, "60%");
+                velValue = 12000 * 0.2;
+                controller.set_text(0, 0, "20%");
 
                 velState = 1;
             } else if(velState == 1) {

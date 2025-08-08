@@ -2,78 +2,28 @@
 #include <queue>
 #include "drivecode/color.hpp"
 
-/*
-
-if color sort red
-    if color red
-        push wrong
-    if color blue
-        push right
-
-if color sort blue
-    if color blue
-        push wrong
-    if color red
-        push right
-
-if detect above bucket
-    prev wrong finished
-else
-    prev wrong not finished
-
-keep track of:
-first two blocks in intake
-if wrong block is above bucket
-if right block is fully scored
-
-if color right
-    if prev wrong not finished 
-        wait
-    intake bucket
-if color wrong
-    if prev right not bucket
-        wait
-    intake outake
-
-
-if sort mid
-    if color right
-        if prev correct
-            dont wait
-        if prev wrong
-            wait until prev wrong outtake
-        set intake top
-    if color wrong
-        if prev wrong
-            dont wait
-        if prev correct
-            wait until prev correct scored
-        set intake mid
-
-*/
-
-int sortState = 1; //change back to 0
+int sortState = 2; //change back to 0
 bool sortButtonPressed = false;
 std::queue<bool> wrongColor;
 bool prevWrong = false;
 bool blockDetected = false;
 
-void waitUntilCorrect(char color) {
-    if(color == 'R') {
-        while(!(0 < lowerColor.get_hue() && lowerColor.get_hue() < 25)) {
-            std::cout<<"waiting\n";
-            pros::delay(10);
-        }
-        std::cout<<"done\n";
-    } else if(color == 'B') {
-        while(!(200 < lowerColor.get_hue() && lowerColor.get_hue() < 240)) {
-            pros::delay(10);
-        }
-    }
-}
+// void waitUntilCorrect(char color) {
+//     if(color == 'R') {
+//         while(!(0 < lowerColor.get_hue() && lowerColor.get_hue() < 25)) {
+//             std::cout<<"waiting\n";
+//             pros::delay(10);
+//         }
+//         std::cout<<"done\n";
+//     } else if(color == 'B') {
+//         while(!(200 < lowerColor.get_hue() && lowerColor.get_hue() < 240)) {
+//             pros::delay(10);
+//         }
+//     }
+// }
 
 void updateColorSort() {
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) { //cycle color sort modes
         if(!sortButtonPressed) {
             sortState++;
             if(sortState == 3) {
@@ -89,22 +39,41 @@ void updateColorSort() {
 
 void runColorSort() {
     while(true) {
-        if(sortState == 0) {
+        if(sortState == 0) { //if no sort, run nothing
             pros::delay(10);
             continue;
         }
 
         if(sortState == 1) { //score red, sort blue
-            if(0 < lowerColor.get_hue() && lowerColor.get_hue() < 25) { //if a newly detected ring is red,
-                if(!blockDetected) { //and a ring hasn't been detected yet,
+            if(0 < lowerColor.get_hue() && lowerColor.get_hue() < 25) { //if a red block is detected,
+                if(!blockDetected) { //for the first time (toggle style logic),
                     blockDetected = true;
-                    wrongColor.push(false);
-                    std::cout<<wrongColor.back()<<"   I SAW RED "<<"\n";
+                    wrongColor.push(false); //push a red block (false) to queue
+                    // std::cout<<wrongColor.back()<<"   I SAW RED "<<"\n";
                 }
-            } else if(200 < lowerColor.get_hue() && lowerColor.get_hue() < 240) {
+            } else if(200 < lowerColor.get_hue() && lowerColor.get_hue() < 240) { //if a blue block is detected,
                 if(!blockDetected) { //and a ring hasn't been detected yet,
                     blockDetected = true;
-                    wrongColor.push(true);
+                    wrongColor.push(true); //push a blue block (true) to queue
+                    // std::cout<<wrongColor.back()<<"   I SAW BLUE "<<"\n";
+                }
+            } else {
+                blockDetected = false;
+            }
+        }
+
+        if(sortState == 2) { //score blue, sort red
+            if(0 < lowerColor.get_hue() && lowerColor.get_hue() < 25) { //if a red block is detected,
+                if(!blockDetected) { //for the first time (toggle style logic),
+                    blockDetected = true;
+                    wrongColor.push(true); //push a red block (true) to queue
+                    std::cout<<wrongColor.back()<<"   I SAW RED "<<"\n";
+
+                }
+            } else if(200 < lowerColor.get_hue() && lowerColor.get_hue() < 240) { //if a blue block is detected,
+                if(!blockDetected) { //and a ring hasn't been detected yet,
+                    blockDetected = true;
+                    wrongColor.push(false); //push a blue block (false) to queue
                     std::cout<<wrongColor.back()<<"   I SAW BLUE "<<"\n";
                 }
             } else {

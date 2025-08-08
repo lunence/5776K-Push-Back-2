@@ -26,13 +26,19 @@ void initialize() {
 	sensorInit();
 }
 
-void disabled() {}
+void disabled() {
 
-void competition_initialize() {}
+}
+
+void competition_initialize() {
+	
+}
 
 void autonomous() {
-	chassis.turnToHeading(45, 5000);
-	//chassis.moveToPoint(0, 24, 3000);
+	//chassis.turnToHeading(90, 5000);
+	chassis.moveToPoint(0, 24, 1000);
+	chassis.turnToHeading(-90, 1000);
+	chassis.moveToPoint(-24, 24, 1000);
 }
 
 void opcontrol() {
