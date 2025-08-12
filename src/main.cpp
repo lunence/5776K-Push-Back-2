@@ -4,6 +4,8 @@
 #include "drivecode/util.hpp"
 #include "pros/misc.h"
 #include "drivecode/color.hpp"
+#include "autonomous/autonSelector.hpp"
+#include <iostream>
 
 void on_center_button() {
 	static bool pressed = false;
@@ -21,6 +23,9 @@ void initialize() {
 	chassis.calibrate();
 	// chassis.setPose(0, 0, 0);
 
+	colorSelector();
+	autonSelector();
+
 	taskInit();
 	motorInit();
 	sensorInit();
@@ -35,6 +40,40 @@ void competition_initialize() {
 }
 
 void autonomous() {
+	if(color == 'R') {
+		switch(auton) {
+			case 1: {
+				std::cout<<"red auton 1\n";
+				break;
+			}
+			case 2: {
+				std::cout<<"red auton 2\n";
+				break;
+			}
+			case 3: {
+				std::cout<<"red auton 3\n";
+				break;
+			}
+		}
+	} else if(color == 'B') {
+		switch(auton) {
+			case 1: {
+				std::cout<<"blue auton 1\n";
+				break;
+			}
+			case 2: {
+				std::cout<<"blue auton 2\n";
+				break;
+			}
+			case 3: {
+				std::cout<<"blue auton 3\n";
+				break;
+			}
+		}
+	} else {
+		std::cout<<"testing\n";
+	}
+	
 	//chassis.turnToHeading(90, 5000);
 	chassis.moveToPoint(0, 24, 1000);
 	chassis.turnToHeading(-90, 1000);
