@@ -51,9 +51,9 @@ lemlib::Drivetrain drivetrain(
 );
 
 lemlib::ControllerSettings lateralController( //TODO: tune error zones, pids
-    4,
+    4.6,
     0,
-    0,
+    0.1,
     3,
     1,
     100,
@@ -63,7 +63,7 @@ lemlib::ControllerSettings lateralController( //TODO: tune error zones, pids
 );
 
 lemlib::ControllerSettings angularController( //TODO: tune error zones, pids
-    3.57, 
+    3.35, 
     0,
     26, 
     3,
