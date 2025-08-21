@@ -23,7 +23,7 @@ void initialize() {
 	chassis.calibrate();
 	// chassis.setPose(0, 0, 0);
 
-	autonSelector();
+	//autonSelector();
 
 	taskInit();
 	motorInit();
@@ -73,10 +73,10 @@ void autonomous() {
 		std::cout<<"testing\n";
 	}
 	
-	//chassis.turnToHeading(90, 5000);
-	chassis.moveToPoint(0, 24, 1000);
-	chassis.turnToHeading(-90, 1000);
-	chassis.moveToPoint(-24, 24, 1000);
+	chassis.turnToHeading(90, 5000);
+	// chassis.moveToPoint(0, 24, 1000);
+	// chassis.turnToHeading(-90, 1000);
+	// chassis.moveToPoint(-24, 24, 1000);
 }
 
 void opcontrol() {

@@ -19,7 +19,7 @@ void sensorInit() {
 //begin all tasks
 void taskInit() {
     pros::Task intakeTask(runIntake, "intake task");
-    //pros::Task consoleTask(runConsole, "console task");
+    pros::Task consoleTask(runConsole, "console task");
     pros::Task pistonTask(runPistons, "piston task");
     pros::Task colorTask(runColorSort, "color task");
     pros::Task screenTask(runScreen, "screen task");
