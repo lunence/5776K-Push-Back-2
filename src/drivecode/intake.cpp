@@ -1,6 +1,7 @@
 #include <iostream>
 #include "drivecode/intake.hpp"
 #include "drivecode/pistons.hpp"
+#include <iostream>
 
 int intakeState = 0;
 
@@ -17,53 +18,54 @@ int velState = 0;
 
 void runIntake() {
     while(true) {
+        //std::cout<<"intake vel: "<<bottomRoller.get_voltage()<<".  expected vel: "<<velValue<<"\n";
         switch(intakeState) {
             case 0: {
-                bottomRoller.move_velocity(0);
-                topRoller.move_velocity(0);
-                indexer.move_velocity(0);
+                bottomRoller.move_voltage(0);
+                topRoller.move_voltage(0);
+                indexer.move_voltage(0);
                 break;
             }
 
             case 1: {
-                bottomRoller.move_velocity(velValue);
-                topRoller.move_velocity(velValue);
-                indexer.move_velocity(-velValue);
+                bottomRoller.move_voltage(velValue);
+                topRoller.move_voltage(velValue);
+                indexer.move_voltage(-velValue);
                 break;
             }
 
             case 2: {
-                bottomRoller.move_velocity(velValue);
-                topRoller.move_velocity(-velValue);
-                indexer.move_velocity(-velValue);
+                bottomRoller.move_voltage(velValue);
+                topRoller.move_voltage(-velValue);
+                indexer.move_voltage(-velValue);
                 break;
             }
 
             case 3: {
-                bottomRoller.move_velocity(-velValue);
-                topRoller.move_velocity(-velValue);
-                indexer.move_velocity(0);
+                bottomRoller.move_voltage(-velValue);
+                topRoller.move_voltage(-velValue);
+                indexer.move_voltage(0);
                 break;
             }
 
             case 4: {
-                bottomRoller.move_velocity(-velValue);
-                topRoller.move_velocity(-velValue);
-                indexer.move_velocity(-velValue);
+                bottomRoller.move_voltage(-velValue);
+                topRoller.move_voltage(-velValue);
+                indexer.move_voltage(-velValue);
                 break;
             }
 
             case 5: {
-                bottomRoller.move_velocity(velValue);
-                topRoller.move_velocity(-velValue); //change back to 0 if no color sort and if it affects something
-                indexer.move_velocity(velValue);
+                bottomRoller.move_voltage(velValue);
+                topRoller.move_voltage(0); 
+                indexer.move_voltage(velValue);
                 break;
             }
 
             case 6: { //color sort outtake
-                bottomRoller.move_velocity(velValue);
-                topRoller.move_velocity(-velValue);
-                indexer.move_velocity(-velValue);
+                bottomRoller.move_voltage(velValue);
+                topRoller.move_voltage(-velValue);
+                indexer.move_voltage(-velValue);
                 break;
             }
 
@@ -143,12 +145,12 @@ void updateIntake() {
         bPressed = false;
     }
 
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //toggle velocity
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //toggle voltage
         if(!velButtonPressed) {
             velButtonPressed = true;
             if(velState == 0) {
-                velValue = 12000 * 0.2;
-                controller.set_text(0, 0, "20%");
+                velValue = 12000 * 0.6;
+                controller.set_text(0, 0, "60% ");
 
                 velState = 1;
             } else if(velState == 1) {

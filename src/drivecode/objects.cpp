@@ -9,9 +9,9 @@ pros::MotorGroup leftMotors({-10, -9, -3}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
 
 //piston definitions
-pros::ADIDigitalOut littleWill ('A'); //not correct pls fix later
+pros::ADIDigitalOut littleWill ('C'); //not correct pls fix later
 pros::ADIDigitalOut hood ('B');
-pros::ADIDigitalOut trapdoor ('C');
+pros::ADIDigitalOut trapdoor ('A');
 
 //sensor definitions
 pros::Optical upperColor(0); //TODO: fix port

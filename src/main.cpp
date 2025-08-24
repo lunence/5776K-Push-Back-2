@@ -2,9 +2,12 @@
 #include "drivecode/intake.hpp"
 #include "drivecode/objects.hpp"
 #include "drivecode/util.hpp"
+#include "lemlib/chassis/chassis.hpp"
 #include "pros/misc.h"
 #include "drivecode/color.hpp"
 #include "autonomous/autonSelector.hpp"
+#include "autonomous/autons.hpp"
+#include "pros/motors.h"
 #include <iostream>
 
 void on_center_button() {
@@ -39,6 +42,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
+	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
 	if(color == 'R') {
 		switch(auton) {
 			case 1: {
@@ -71,15 +75,17 @@ void autonomous() {
 		}
 	} else {
 		std::cout<<"testing\n";
+		redSWP();
 	}
 	
 	// chassis.turnToHeading(180, 5000);
-	chassis.moveToPoint(0, 24, 5000);
+	// chassis.moveToPoint(0, 24, 5000);
 	// chassis.turnToHeading(-90, 1000);
 	// chassis.moveToPoint(-24, 24, 1000);
 }
 
 void opcontrol() {
+	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 	while (true) {
 		//subsystems
 		updateIntake();
