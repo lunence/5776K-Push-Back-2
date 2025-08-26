@@ -154,3 +154,61 @@ void waitUntilIntaked(int number, char color, int timeout) {
         }
     }
 }
+
+void outtakeUntilCorrect(char color, int timeout) {
+    int timeElapsed = 0;
+    bool colorDetected = false;
+    if(color == 'B') {
+        while(true) {
+            if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20) { //if hue is red
+                if(!colorDetected) { //"toggle" logic
+                    intakeState = 3;
+                }
+                colorDetected = true;
+            } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) {
+                if(!colorDetected) { //"toggle" logic
+                    intakeState = 1;
+                    pros::delay(500);
+                    intakeState = 0;
+                    break;
+                }
+                colorDetected = true;
+            } else {
+                colorDetected = false;
+            }
+
+            if(timeout <= timeElapsed * 10) { //timeout
+                break;
+            }
+
+            pros::delay(10);
+        }
+    }
+
+    if(color == 'R') {
+        while(true) {
+            if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) { //if hue is red
+                if(!colorDetected) { //"toggle" logic
+                    intakeState = 3;
+                }
+                colorDetected = true;
+            } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) {
+                if(!colorDetected) { //"toggle" logic
+                    intakeState = 1;
+                    pros::delay(500);
+                    intakeState = 0;
+                    break;
+                }
+                colorDetected = true;
+            } else {
+                colorDetected = false;
+            }
+
+            if(timeout <= timeElapsed * 10) { //timeout
+                break;
+            }
+
+            pros::delay(10);
+        }
+    }
+}
