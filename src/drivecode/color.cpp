@@ -112,7 +112,7 @@ void waitUntilIntaked(int number, char color, int timeout) {
 
     if(color == 'R') {
         while(true) {
-            if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20) { //if hue is red
+            if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20 || upperColor.get_hue() > 0 && upperColor.get_hue() < 20) { //if hue is red
                 if(!colorDetected) { //"toggle" logic
                     count++; //increment count
                     if (count == number) {
@@ -134,7 +134,7 @@ void waitUntilIntaked(int number, char color, int timeout) {
 
     if(color == 'B') {
         while(true) {
-            if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) { //if hue is red
+            if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240 || upperColor.get_hue() > 200 && upperColor.get_hue() < 240) { //if hue is red
                 if(!colorDetected) { //"toggle" logic
                     count++; //increment count
                     if (count == number) {
@@ -160,12 +160,12 @@ void outtakeUntilCorrect(char color, int timeout) {
     bool colorDetected = false;
     if(color == 'B') {
         while(true) {
-            if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20) { //if hue is red
+            if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20 || upperColor.get_hue() > 0 && upperColor.get_hue() < 20) { //if hue is red
                 if(!colorDetected) { //"toggle" logic
                     intakeState = 3;
                 }
                 colorDetected = true;
-            } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) {
+            } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240 || upperColor.get_hue() > 200 && upperColor.get_hue() < 240) {
                 if(!colorDetected) { //"toggle" logic
                     intakeState = 1;
                     pros::delay(500);
@@ -187,12 +187,12 @@ void outtakeUntilCorrect(char color, int timeout) {
 
     if(color == 'R') {
         while(true) {
-            if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) { //if hue is red
+            if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240 || upperColor.get_hue() > 200 && upperColor.get_hue() < 240) { //if hue is blue
                 if(!colorDetected) { //"toggle" logic
                     intakeState = 3;
                 }
                 colorDetected = true;
-            } else if(lowerColor.get_hue() > 200 && lowerColor.get_hue() < 240) {
+            } else if(lowerColor.get_hue() > 0 && lowerColor.get_hue() < 20 || upperColor.get_hue() > 0 && upperColor.get_hue() < 20) {
                 if(!colorDetected) { //"toggle" logic
                     intakeState = 1;
                     pros::delay(500);
