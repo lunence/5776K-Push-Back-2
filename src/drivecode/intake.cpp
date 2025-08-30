@@ -13,6 +13,7 @@ bool l2Pressed = false;
 bool r1Pressed = false;
 bool downPressed = false;
 bool bPressed = false;
+bool r2Pressed = false;
 
 int velState = 0;
 
@@ -20,52 +21,33 @@ void runIntake() {
     while(true) {
         //std::cout<<"intake vel: "<<bottomRoller.get_voltage()<<".  expected vel: "<<velValue<<"\n";
         switch(intakeState) {
-            case 0: {
+            case 0: { //stop intake
                 bottomRoller.move_voltage(0);
                 topRoller.move_voltage(0);
-                indexer.move_voltage(0);
                 break;
             }
 
-            case 1: {
+            case 1: { //long goal
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(velValue);
-                indexer.move_voltage(-velValue);
                 break;
             }
 
-            case 2: {
+            case 2: { //mid goal
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(-velValue);
-                indexer.move_voltage(-velValue);
                 break;
             }
 
-            case 3: {
+            case 3: { //low goal
                 bottomRoller.move_voltage(-velValue);
                 topRoller.move_voltage(-velValue);
-                indexer.move_voltage(0);
                 break;
             }
 
-            case 4: {
-                bottomRoller.move_voltage(-velValue);
-                topRoller.move_voltage(-velValue);
-                indexer.move_voltage(-velValue);
-                break;
-            }
-
-            case 5: {
+            case 5: { //load intake (only bottom rollers)
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(0); 
-                indexer.move_voltage(velValue);
-                break;
-            }
-
-            case 6: { //color sort outtake
-                bottomRoller.move_voltage(velValue);
-                topRoller.move_voltage(-velValue);
-                indexer.move_voltage(-velValue);
                 break;
             }
 
@@ -76,9 +58,9 @@ void runIntake() {
 }
 
 void updateIntake() {
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
-        intakeState = 0;
-    }
+    // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
+    //     intakeState = 0;
+    // }
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
         if(!l1Pressed) {
@@ -118,23 +100,10 @@ void updateIntake() {
     } else {
         r1Pressed = false;
     }
-        
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //down, low goal (clear bucket), state 4
-        if(!downPressed) {
-            downPressed = true;
-            if (intakeState == 4) {
-                intakeState = 0;
-            } else {
-                intakeState = 4;
-            }
-        }
-    } else {
-        downPressed = false;
-    } 
-    
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //b, load bucket
-        if(!bPressed) {
-            bPressed = true;
+
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, load intake, state 5
+        if(!r2Pressed) {
+            r2Pressed = true;
             if (intakeState == 5) {
                 intakeState = 0;
             } else {
@@ -142,10 +111,36 @@ void updateIntake() {
             }
         }
     } else {
-        bPressed = false;
+        r2Pressed = false;
     }
+        
+    // if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //down, low goal (clear bucket), state 4
+    //     if(!downPressed) {
+    //         downPressed = true;
+    //         if (intakeState == 4) {
+    //             intakeState = 0;
+    //         } else {
+    //             intakeState = 4;
+    //         }
+    //     }
+    // } else {
+    //     downPressed = false;
+    // } 
+    
+    // if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //b, load bucket
+    //     if(!bPressed) {
+    //         bPressed = true;
+    //         if (intakeState == 5) {
+    //             intakeState = 0;
+    //         } else {
+    //             intakeState = 5;
+    //         }
+    //     }
+    // } else {
+    //     bPressed = false;
+    // }
 
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //toggle voltage
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //toggle voltage
         if(!velButtonPressed) {
             velButtonPressed = true;
             if(velState == 0) {

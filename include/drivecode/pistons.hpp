@@ -2,7 +2,7 @@
 #include "objects.hpp"
 
 extern int littleWillState;
-extern int hoodState;
+extern int descoreState;
 extern int trapdoorState;
 
 void updatePistons();
