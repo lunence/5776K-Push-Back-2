@@ -75,6 +75,8 @@ void autonomous() {
 		}
 	} else {
 		std::cout<<"testing\n";
+		//intakeState = 1;
+		//outtakeUntilCorrect('R', 100000);
 		redSWP();
 	}
 	

@@ -10,8 +10,8 @@ pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
 
 //piston definitions
 pros::ADIDigitalOut littleWill ('C'); //not correct pls fix later
-pros::ADIDigitalOut descore ('B');
-pros::ADIDigitalOut trapdoor ('A');
+pros::ADIDigitalOut descore ('A');
+pros::ADIDigitalOut trapdoor ('B');
 
 //sensor definitions
 pros::Optical upperColor(0); //TODO: fix port

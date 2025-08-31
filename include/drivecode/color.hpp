@@ -7,3 +7,4 @@ extern int sortState;
 void waitUntilIntaked(int number, bool color);
 void updateColorSort();
 void runColorSort();
+void outtakeUntilCorrect(char color, int timeout);
