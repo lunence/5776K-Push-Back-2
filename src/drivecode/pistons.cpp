@@ -74,7 +74,7 @@ void runPistons() {
         //trapdoor
         if(trapdoorState == 0) {
             trapdoor.set_value(false);
-        } else if(descoreState == 1) {
+        } else if(trapdoorState == 1) {
             trapdoor.set_value(true);
         }
 

@@ -9,7 +9,7 @@ pros::MotorGroup leftMotors({-10, -9, -3}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
 
 //piston definitions
-pros::ADIDigitalOut littleWill ('C'); //not correct pls fix later
+pros::ADIDigitalOut littleWill ('C'); 
 pros::ADIDigitalOut descore ('A');
 pros::ADIDigitalOut trapdoor ('B');
 
