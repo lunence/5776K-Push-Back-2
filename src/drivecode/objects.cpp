@@ -34,7 +34,7 @@ lemlib::TrackingWheel vertOdom(
 );
 
 lemlib::OdomSensors odomSensors(
-    &vertOdom,
+    &vertOdom, //got rid of odom
     nullptr,
     &horizOdom,
     nullptr,
