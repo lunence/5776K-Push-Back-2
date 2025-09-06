@@ -3,7 +3,7 @@
 
 void redSWP() {
     //go to match loader
-    chassis.moveToPoint(0, 28, 1000, {.maxSpeed = 80});
+    chassis.moveToPoint(0, 28,1000, {.maxSpeed = 80});
     chassis.turnToHeading(90, 1000);
     chassis.waitUntilDone();
     littleWillState = 1;
@@ -14,40 +14,44 @@ void redSWP() {
 
     //perform intaking at matchloader
     intakeState = 5;
-    leftMotors.move_voltage(1000);
-    rightMotors.move_velocity(1000);
-    pros::delay(1100); //decrease
-    leftMotors.move_voltage(0);
-    rightMotors.move_voltage(0);
-    intakeState = 0;
-
-    // if(abs(chassis.getPose().x-28)>3 || abs(chassis.getPose().theta-90)>3 ) { //TODO: did ts work
-    //     chassis.setPose(chassis.getPose().x, 29, 90);
-    //     std::cout<<"position reset\n";
-    // }
-
+    // leftMotors.move_voltage(800);
+    // rightMotors.move_voltage(800);
+    pros::delay(1000); //decrease
+    // leftMotors.move_voltage(0);
+    // rightMotors.move_voltage(0);
+    // intakeState = 0;
+    // pros::delay(100);
 
     //back away from match loader
-    chassis.moveToPoint(-7, 28.9, 1000, {.forwards = false, .maxSpeed = 80});
-    chassis.waitUntilDone();
+    leftMotors.move_voltage(-6000);
+    rightMotors.move_voltage(-6000);
+    pros::delay(250); //decrease
+    leftMotors.move_voltage(0);
+    rightMotors.move_voltage(0);
     littleWillState = 0;
 
     //turn, go to long goal, and score
     chassis.turnToHeading(-90, 1000);
     chassis.waitUntilDone();
+
+    // return;
+
     trapdoorState = 1;
-    chassis.moveToPoint(-19.95, 31, 1000, {.maxSpeed = 90}); //TODO: did some coord change, undo if no work
+    chassis.moveToPoint(-20, 28, 1000, {.maxSpeed = 90});
+
     leftMotors.move_velocity(100);
     rightMotors.move_velocity(100);
     pros::delay(600);
+
     intakeState = 1;
     pros::delay(1500);
     leftMotors.move_velocity(0);
     rightMotors.move_velocity(0);
 
+    return;
 
     //go to middle right blocks
-    chassis.moveToPoint(-1, 30, 1000, {.forwards = false});
+    chassis.moveToPoint(0, 28, 1000, {.forwards = false});
     intakeState = 3;
     trapdoorState = 0;
     pros::delay(500);
