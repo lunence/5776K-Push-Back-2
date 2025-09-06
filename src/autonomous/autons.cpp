@@ -3,41 +3,56 @@
 
 void redSWP() {
     //go to match loader
-    chassis.moveToPoint(0, 28, 1000);
-    littleWillState = 1;
-    chassis.turnToHeading(88, 1000);
-    chassis.moveToPoint(10, 28.9, 500, {.minSpeed=127});
+    chassis.moveToPoint(0, 28, 1000, {.maxSpeed = 80});
+    chassis.turnToHeading(90, 1000);
     chassis.waitUntilDone();
-    //chassis.turnToHeading(95, 500, {.earlyExitRange = 3});
-    //chassis.turnToHeading(90, 500);
+    littleWillState = 1;
+    pros::delay(200);
+    leftMotors.move_voltage(12000);
+    rightMotors.move_voltage(12000);
+    pros::delay(400);
+
+    //perform intaking at matchloader
     intakeState = 5;
-    pros::delay(1000); //decrease
-    if(abs(chassis.getPose().x-28)>3 || abs(chassis.getPose().theta-90)>3 ) {
-        chassis.setPose(chassis.getPose().x, 29, 90);
-        std::cout<<"position reset\n";
-    }
+    leftMotors.move_voltage(1000);
+    rightMotors.move_velocity(1000);
+    pros::delay(1200); //decrease
+    leftMotors.move_voltage(0);
+    rightMotors.move_voltage(0);
     intakeState = 0;
 
-    //back away from match loader and turn to long goal
-    chassis.moveToPoint(-7, 29, 1000, {.forwards = false});\
-   
+    // if(abs(chassis.getPose().x-28)>3 || abs(chassis.getPose().theta-90)>3 ) { //TODO: did ts work
+    //     chassis.setPose(chassis.getPose().x, 29, 90);
+    //     std::cout<<"position reset\n";
+    // }
+
+    return;
+
+    //back away from match loader
+    chassis.moveToPoint(-7, 28.9, 1000, {.forwards = false});
     chassis.waitUntilDone();
     littleWillState = 0;
-    trapdoorState = 1;
-    chassis.turnToHeading(-88, 1000);
 
-    //go to long goal and score
-    chassis.moveToPoint(-23, 29.5, 1000);
+    //turn, go to long goal, and score
+    chassis.turnToHeading(-90, 1000);
     chassis.waitUntilDone();
+    trapdoorState = 1;
+    chassis.moveToPoint(-19.95, 31, 1000, {.maxSpeed = 90}); //TODO: did some coord change, undo if no work
+    leftMotors.move_velocity(100);
+    rightMotors.move_velocity(100);
+    pros::delay(600);
     intakeState = 1;
     pros::delay(1000);
+    leftMotors.move_velocity(0);
+    rightMotors.move_velocity(0);
+
+    return;
 
     //go to middle right blocks
     chassis.moveToPoint(-1, 30, 1000, {.forwards = false});
     intakeState = 3;
     pros::delay(500);
     intakeState = 5;
-    trapdoorState = 0;
     chassis.moveToPose(-23.4, 11.6, -126.8, 2000);
     chassis.turnToHeading(-133, 500);
     chassis.moveToPoint(-24.2, 11, 5000, {.maxSpeed = 20});
@@ -61,6 +76,8 @@ void redSWP() {
     pros::delay(1500);
     velValue = 12000;
     //intakeState = 5; 
+
+    intakeState = 0;
 
 
     // //get left blocks 
