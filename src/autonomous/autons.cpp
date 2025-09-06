@@ -16,7 +16,7 @@ void redSWP() {
     intakeState = 5;
     leftMotors.move_voltage(1000);
     rightMotors.move_velocity(1000);
-    pros::delay(11200); //decrease
+    pros::delay(1100); //decrease
     leftMotors.move_voltage(0);
     rightMotors.move_voltage(0);
     intakeState = 0;
