@@ -53,6 +53,13 @@ void runIntake() {
 
         }
 
+        if(velValue == 12000)
+            controller.set_text(0, 0, "100%");
+        else if(velValue == 12000 * 0.6)
+            controller.set_text(0, 0, "60% ");
+        else if(velValue == 12000 * 0.4)
+            controller.set_text(0, 0, "40% ");
+
         pros::delay(10);
     }
 }
@@ -145,12 +152,12 @@ void updateIntake() {
             velButtonPressed = true;
             if(velState == 0) {
                 velValue = 12000 * 0.6;
-                controller.set_text(0, 0, "60% ");
+                //controller.set_text(0, 0, "60% ");
 
                 velState = 1;
             } else if(velState == 1) {
                 velValue = 12000;
-                controller.set_text(0, 0, "100%");
+                //controller.set_text(0, 0, "100%");
 
                 velState = 0;
             }

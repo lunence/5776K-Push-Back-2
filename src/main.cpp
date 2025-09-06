@@ -89,6 +89,9 @@ void autonomous() {
 void opcontrol() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 	while (true) {
+		velValue = 12000;
+	    intakeState = 0;
+
 		//subsystems
 		updateIntake();
 		updatePistons();

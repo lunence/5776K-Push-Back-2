@@ -26,7 +26,6 @@ void redSWP() {
     //     std::cout<<"position reset\n";
     // }
 
-    return;
 
     //back away from match loader
     chassis.moveToPoint(-7, 28.9, 1000, {.forwards = false});
@@ -42,15 +41,15 @@ void redSWP() {
     rightMotors.move_velocity(100);
     pros::delay(600);
     intakeState = 1;
-    pros::delay(1000);
+    pros::delay(1500);
     leftMotors.move_velocity(0);
     rightMotors.move_velocity(0);
 
-    return;
 
     //go to middle right blocks
     chassis.moveToPoint(-1, 30, 1000, {.forwards = false});
     intakeState = 3;
+    trapdoorState = 0;
     pros::delay(500);
     intakeState = 5;
     chassis.moveToPose(-23.4, 11.6, -126.8, 2000);
@@ -67,17 +66,14 @@ void redSWP() {
     //intakeState = 0; 
 
     //move to center bottom goal and score
+    velValue *= 0.4;
     chassis.turnToHeading(-139, 1000);
-    chassis.moveToPoint(-40.9, -3.2, 1000, {.maxSpeed = 50}); //go further into low goal
+    chassis.moveToPoint(-38, -1, 1000, {.maxSpeed = 50}); //go further into low goal
     chassis.waitUntilDone();
     chassis.turnToHeading(-139, 1000);
-    velValue *= 0.6;
     intakeState = 3;
     pros::delay(1500);
-    velValue = 12000;
-    //intakeState = 5; 
 
-    intakeState = 0;
 
 
     // //get left blocks 

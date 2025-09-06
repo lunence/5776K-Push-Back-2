@@ -1,4 +1,5 @@
 #include "drivecode/pistons.hpp"
+#include "drivecode/intake.hpp"
 
 int littleWillState = 0;
 int descoreState = 0;
@@ -60,8 +61,10 @@ void runPistons() {
         //little will
         if(littleWillState == 0) {
             littleWill.set_value(false);
+            velValue = 12000;
         } else if(littleWillState == 1) {
             littleWill.set_value(true);
+            velValue = 12000 * 0.6;
         } 
         
         //descore
