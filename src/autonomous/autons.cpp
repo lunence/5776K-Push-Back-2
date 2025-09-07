@@ -151,7 +151,7 @@ void redSWP() {
     //move to center bottom goal and score
     velValue *= 0.4;
     chassis.turnToHeading(-128.6, 500);
-    chassis.moveToPoint(-46.6, -7.7, 1500, {.maxSpeed = 50}); //go further into low goal
+    chassis.moveToPoint(-44.2, -7.4, 1500, {.maxSpeed = 50}); //go further into low goal
     chassis.waitUntilDone();
     //chassis.turnToHeading(-139, 1000);
     intakeState = 3;
