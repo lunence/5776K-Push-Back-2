@@ -77,7 +77,9 @@ void autonomous() {
 		std::cout<<"testing\n";
 		//intakeState = 1;
 		//outtakeUntilCorrect('R', 100000);
+		//longGoalRight();
 		redSWP();
+		//skills();
 	}
 	
 	// chassis.turnToHeading(180, 5000);
@@ -88,9 +90,9 @@ void autonomous() {
 
 void opcontrol() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
+	velValue = 12000;
+	intakeState = 0;
 	while (true) {
-		velValue = 12000;
-	    intakeState = 0;
 
 		//subsystems
 		updateIntake();

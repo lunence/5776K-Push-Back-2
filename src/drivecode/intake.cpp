@@ -57,8 +57,6 @@ void runIntake() {
             controller.set_text(0, 0, "100%");
         else if(velValue == 12000 * 0.6)
             controller.set_text(0, 0, "60% ");
-        else if(velValue == 12000 * 0.4)
-            controller.set_text(0, 0, "40% ");
 
         pros::delay(10);
     }
