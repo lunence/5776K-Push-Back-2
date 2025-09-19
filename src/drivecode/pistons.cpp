@@ -4,16 +4,19 @@
 int littleWillState = 0;
 int descoreState = 0;
 int trapdoorState = 0;
+int colorPistonState = 0;
+int triggerval = 30;
+int distanceval = 0;
 
-bool rightPressed = false;
-bool BPressed = false;
-bool YPressed = false;
+bool littleWillPressed = false;
+bool descorePressed = false;
+bool trapPressed = false;
 
 void updatePistons() {
     //little will
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //b
-        if(!BPressed) {
-            BPressed = true;
+        if(!littleWillPressed) {
+            littleWillPressed = true;
             if(littleWillState == 0) {
                 littleWillState = 1;
             } else if(littleWillState == 1){
@@ -21,13 +24,13 @@ void updatePistons() {
             }
         } 
     } else {
-        BPressed = false;
+        littleWillPressed = false;
     }
 
     //descore
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) { //right
-        if(!YPressed) {
-            YPressed = true;
+        if(!descorePressed) {
+            descorePressed = true;
             if(descoreState == 0) {
                 descoreState = 1;
             } else if (descoreState == 1){
@@ -35,13 +38,13 @@ void updatePistons() {
             }
         }
     } else {
-        YPressed = false;
+        descorePressed = false;
     }
 
     //trapdoor
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) { //right
-        if(!rightPressed) {
-            rightPressed = true;
+        if(!trapPressed) {
+            trapPressed = true;
             if(trapdoorState == 0) {
                 trapdoorState = 1;
             } else if (trapdoorState == 1){
@@ -49,10 +52,20 @@ void updatePistons() {
             }
         }
     } else {
-        rightPressed = false;
-    }
-    
+        trapPressed = false;
+    } 
 
+}
+
+void trapdooreject() {
+    //distanceval = distance.get();
+    if (distance.get()<=30) {
+        //trapdoorState = 1;
+        topRoller.move_voltage(0);
+        //pros::delay(20000);
+        //trapdoorState = 0;
+        //distanceval = distance.get();
+    }
 }
 
 void runPistons() {
@@ -79,6 +92,14 @@ void runPistons() {
             trapdoor.set_value(false);
         } else if(trapdoorState == 1) {
             trapdoor.set_value(true);
+            trapdooreject();
+        }
+
+        //color piston
+        if(colorPistonState == 0) {
+            colorPiston.set_value(false);
+        } else if(colorPistonState == 1) {
+            colorPiston.set_value(true);
         }
 
         pros::delay(10);

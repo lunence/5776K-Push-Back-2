@@ -8,12 +8,10 @@ int intakeState = 0;
 int velValue = 12000;
 bool velButtonPressed = false;
 
-bool l1Pressed = false;
-bool l2Pressed = false;
-bool r1Pressed = false;
-bool downPressed = false;
-bool bPressed = false;
-bool r2Pressed = false;
+bool onePressed = 0;
+bool twoPressed = false;
+bool threePressed = false;
+bool fourPressed = false;
 
 int velState = 0;
 
@@ -30,7 +28,7 @@ void runIntake() {
             case 1: { //long goal
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(velValue);
-                break;
+                break; 
             }
 
             case 2: { //mid goal
@@ -45,7 +43,7 @@ void runIntake() {
                 break;
             }
 
-            case 5: { //load intake (only bottom rollers)
+            case 4: { //load intake (only bottom rollers)
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(0); 
                 break;
@@ -53,10 +51,7 @@ void runIntake() {
 
         }
 
-        if(velValue == 12000)
-            controller.set_text(0, 0, "100%");
-        else if(velValue == 12000 * 0.6)
-            controller.set_text(0, 0, "60% ");
+        
 
         pros::delay(10);
     }
@@ -66,10 +61,14 @@ void updateIntake() {
     // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
     //     intakeState = 0;
     // }
+
+    std::cout<<"running\n";
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
-        if(!l1Pressed) {
-            l1Pressed = true;
+        std::cout<<"pressed L1\n";
+        if(!onePressed) {
+            std::cout<<"toggle\n";
+            onePressed = 1;
             if (intakeState == 1) {
                 intakeState = 0;
             } else {
@@ -77,12 +76,14 @@ void updateIntake() {
             }
         } 
     } else {
-        l1Pressed = false;
+        onePressed = 0;
     }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
-        if(!l2Pressed) {
-            l2Pressed = true;
+        std::cout<<"pressed L2\n";
+        if(!twoPressed) {
+            std::cout<<"toggle\n";
+            twoPressed = true;
             if (intakeState == 2) {
                 intakeState = 0;
             } else {
@@ -90,12 +91,12 @@ void updateIntake() {
             }
         }
     } else {
-        l2Pressed = false;
+        twoPressed = false;
     }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) { //r1, low goal (standard), state 3
-        if(!r1Pressed) {
-            r1Pressed = true;
+        if(!threePressed) {
+            threePressed = true;
             if (intakeState == 3) {
                 intakeState = 0;
             } else {
@@ -103,60 +104,31 @@ void updateIntake() {
             }
         }
     } else {
-        r1Pressed = false;
+        threePressed = false;
     }
 
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, load intake, state 5
-        if(!r2Pressed) {
-            r2Pressed = true;
-            if (intakeState == 5) {
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, load intake, state 4
+        if(!fourPressed) {
+            fourPressed = true;
+            if (intakeState == 4) {
                 intakeState = 0;
             } else {
-                intakeState = 5;
+                intakeState = 4;
             }
         }
     } else {
-        r2Pressed = false;
+        fourPressed = false;
     }
         
-    // if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //down, low goal (clear bucket), state 4
-    //     if(!downPressed) {
-    //         downPressed = true;
-    //         if (intakeState == 4) {
-    //             intakeState = 0;
-    //         } else {
-    //             intakeState = 4;
-    //         }
-    //     }
-    // } else {
-    //     downPressed = false;
-    // } 
-    
-    // if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //b, load bucket
-    //     if(!bPressed) {
-    //         bPressed = true;
-    //         if (intakeState == 5) {
-    //             intakeState = 0;
-    //         } else {
-    //             intakeState = 5;
-    //         }
-    //     }
-    // } else {
-    //     bPressed = false;
-    // }
 
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //toggle voltage
         if(!velButtonPressed) {
             velButtonPressed = true;
             if(velState == 0) {
                 velValue = 12000 * 0.6;
-                //controller.set_text(0, 0, "60% ");
-
                 velState = 1;
             } else if(velState == 1) {
                 velValue = 12000;
-                //controller.set_text(0, 0, "100%");
-
                 velState = 0;
             }
         }

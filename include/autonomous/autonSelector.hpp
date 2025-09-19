@@ -1,8 +1,7 @@
 #include "main.h"
 
-extern char color;
+extern char autonColor;
 extern int auton;
 
-void colorSelector();
 void autonSelector();
-void repeatSelection();
+void chooseAuton();

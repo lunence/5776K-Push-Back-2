@@ -1,12 +1,11 @@
-#include "autonSelector.hpp"
-#include "drivecode/util.hpp"
+#include "autonomous/autonSelector.hpp"
 #include "pros/colors.h"
 #include "pros/screen.h"
 #include "pros/screen.hpp"
 #include <iostream>
 
 bool optionSelected = false;
-char color = ' ';
+char autonColor = ' ';
 int auton = -1;
 
 
@@ -58,11 +57,11 @@ void autonSelector() {
     optionSelected = false;
     while(!optionSelected) {
         pros::screen_touch_status_s_t status = pros::screen::touch_status();
-        std::cout<<"x: "<<status.x<<"       y: "<<status.y<<"\n";
+        //std::cout<<"x: "<<status.x<<"       y: "<<status.y<<"\n";
 
         //red button
         if(status.x>=300 && status.x<=490 && status.y>=10 && status.y<=50) {
-            color = 'R';
+            autonColor = 'R';
 
             //overwrite red w/ blue
             pros::screen::set_pen(pros::c::COLOR_BLUE); 
@@ -76,7 +75,7 @@ void autonSelector() {
 
         //blue button
         if(status.x>=300 && status.x<=500 && status.y>=70 && status.y<=110) {
-            color = 'B';
+            autonColor = 'B';
 
             //reset red button to original            
             pros::screen::set_pen(pros::c::COLOR_RED);
@@ -90,7 +89,7 @@ void autonSelector() {
 
         //cancel button
         if(status.x>=300 && status.x<=500 && status.y>=130 && status.y<=170) {
-            color = ' ';
+            autonColor = ' ';
             optionSelected = true;
             pros::screen::print(pros::E_TEXT_MEDIUM, 310, 140, "Canceled!");
             pros::delay(100);
@@ -134,25 +133,45 @@ void autonSelector() {
         }
     }
 
-    pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Color: %c      Auton: %d", color, auton);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Color: %c      Auton: %d", autonColor, auton);
 }
 
-// void repeatSelection() {
-
-//     while(true) {
-//         pros::screen::set_eraser(pros::c::COLOR_BLACK);
-//         pros::screen::erase();
-//         pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
-//         pros::screen::fill_rect(400, 170, 500, 220);
-//         pros::screen::set_pen(pros::c::COLOR_WHITE);
-//         pros::screen::print(pros::E_TEXT_MEDIUM, 410, 180, "Back");
-//         pros::screen_touch_status_s_t status = pros::screen::touch_status();
-
-//         if(status.x >= 400 && status.x <= 500 && status.y >= 170 && status.y <= 220) {
-            
-//             colorSelector();
-//             autonSelector();
-//         }
-//         pros::delay(10);
-//     }
-// }
+void chooseAuton() {
+    if(autonColor == 'R') {
+		switch(auton) {
+			case 1: {
+				std::cout<<"red auton 1\n";
+				break;
+			}
+			case 2: {
+				std::cout<<"red auton 2\n";
+				break;
+			}
+			case 3: {
+				std::cout<<"red auton 3\n";
+				break;
+			}
+		}
+	} else if(autonColor == 'B') {
+		switch(auton) {
+			case 1: {
+				std::cout<<"blue auton 1\n";
+				break;
+			}
+			case 2: {
+				std::cout<<"blue auton 2\n";
+				break;
+			}
+			case 3: {
+				std::cout<<"blue auton 3\n";
+				break;
+			}
+		}
+	} else {
+		std::cout<<"testing\n";
+		//intakeState = 1;
+		//outtakeUntilCorrect('R', 100000);
+		//longGoalRight();
+		//skills();
+	}
+}

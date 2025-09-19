@@ -1,10 +1,9 @@
 #include "main.h"
 #include "objects.hpp"
 #include "intake.hpp"
+#include "pistons.hpp"
 
-extern int sortState;
+extern int color;
 
-void waitUntilIntaked(int number, bool color);
 void updateColorSort();
 void runColorSort();
-void outtakeUntilCorrect(char color, int timeout);

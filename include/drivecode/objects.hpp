@@ -2,7 +2,6 @@
 
 //motor declarations
 extern pros::Motor bottomRoller;
-extern pros::Motor indexer;
 extern pros::Motor topRoller;
 
 extern pros::MotorGroup leftMotors;
@@ -12,10 +11,12 @@ extern pros::MotorGroup rightMotors;
 extern pros::ADIDigitalOut littleWill;
 extern pros::ADIDigitalOut descore;
 extern pros::ADIDigitalOut trapdoor;
+extern pros::ADIDigitalOut colorPiston;
 
 //sensor declarations
-extern pros::Optical upperColor;
-extern pros::Optical lowerColor;
+extern pros::Optical colorLeft;
+extern pros::Optical colorRight;
+extern pros::Distance distance;
 extern pros::Imu imu;
 extern pros::Rotation horizRotation;
 extern pros::Rotation vertRotation;

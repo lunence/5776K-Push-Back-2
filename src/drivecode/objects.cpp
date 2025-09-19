@@ -1,21 +1,23 @@
 #include "main.h"
 
 //motor definitions
-pros::Motor bottomRoller(11, pros::MotorGearset::blue);
-pros::Motor topRoller(-12, pros::MotorGearset::blue);
-pros::Motor indexer(15, pros::MotorGearset::green);
+pros::Motor bottomRoller(20, pros::MotorGearset::blue);
+pros::Motor topRoller(12, pros::MotorGearset::blue);
 
 pros::MotorGroup leftMotors({-10, -9, -3}, pros::MotorGearset::blue);
-pros::MotorGroup rightMotors({20, 8, 7}, pros::MotorGearset::blue);
+pros::MotorGroup rightMotors({0, 8, 7}, pros::MotorGearset::blue);
 
 //piston definitions
 pros::ADIDigitalOut littleWill ('C'); 
 pros::ADIDigitalOut descore ('A');
 pros::ADIDigitalOut trapdoor ('B');
+pros::ADIDigitalOut colorPiston ('D');
+
 
 //sensor definitions
-pros::Optical upperColor(0); //TODO: fix port
-pros::Optical lowerColor(1); //TODO: fix port
+pros::Optical colorLeft(0); //TODO: fix port
+pros::Optical colorRight(1); //TODO: fix port
+pros::Distance distance();
 pros::Imu imu(16);
 pros::Rotation horizRotation(-19);
 pros::Rotation vertRotation(2);

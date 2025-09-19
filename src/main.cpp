@@ -43,49 +43,7 @@ void competition_initialize() {
 
 void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	if(color == 'R') {
-		switch(auton) {
-			case 1: {
-				std::cout<<"red auton 1\n";
-				break;
-			}
-			case 2: {
-				std::cout<<"red auton 2\n";
-				break;
-			}
-			case 3: {
-				std::cout<<"red auton 3\n";
-				break;
-			}
-		}
-	} else if(color == 'B') {
-		switch(auton) {
-			case 1: {
-				std::cout<<"blue auton 1\n";
-				break;
-			}
-			case 2: {
-				std::cout<<"blue auton 2\n";
-				break;
-			}
-			case 3: {
-				std::cout<<"blue auton 3\n";
-				break;
-			}
-		}
-	} else {
-		std::cout<<"testing\n";
-		//intakeState = 1;
-		//outtakeUntilCorrect('R', 100000);
-		//longGoalRight();
-		redSWP();
-		//skills();
-	}
-	
-	// chassis.turnToHeading(180, 5000);
-	// chassis.moveToPoint(0, 24, 5000);
-	// chassis.turnToHeading(-90, 1000);
-	// chassis.moveToPoint(-24, 24, 1000);
+	chooseAuton();
 }
 
 void opcontrol() {
