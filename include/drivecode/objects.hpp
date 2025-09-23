@@ -20,6 +20,7 @@ extern pros::Distance distance;
 extern pros::Imu imu;
 extern pros::Rotation horizRotation;
 extern pros::Rotation vertRotation;
+extern pros::Distance distanceSense;
 
 //drivetrain declarations
 extern lemlib::TrackingWheel horizOdom;

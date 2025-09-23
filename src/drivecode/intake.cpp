@@ -16,6 +16,12 @@ bool fourPressed = false;
 int velState = 0;
 
 void runIntake() {
+    int blockCount = 0;
+    int target = 4;
+
+    bool prevInRange = false; 
+
+
     while(true) {
         //std::cout<<"intake vel: "<<bottomRoller.get_voltage()<<".  expected vel: "<<velValue<<"\n";
         switch(intakeState) {
@@ -51,11 +57,29 @@ void runIntake() {
 
         }
 
+        if(trapdoorState == 1){
+            bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
+
+             if (inRange && !prevInRange) {  
+                blockCount++;
+                if (blockCount >= target) {
+                    intakeState = 5;     
+                }
+            }
+            prevInRange = inRange; // im not sure if my logic is right but this shd stop the same ball from being counted over and over ?
+        } else {                            
+            blockCount  = 0; //trapfoor closed
+            prevInRange = false;
+        }
+
+        }
+
         
 
         pros::delay(10);
-    }
+
 }
+
 
 void updateIntake() {
     // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
