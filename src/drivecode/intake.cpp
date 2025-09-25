@@ -57,7 +57,7 @@ void runIntake() {
 
         }
 
-        if(true){
+        if(trapdoorState == 1){
             bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
 
              if (inRange && !prevInRange) {  
