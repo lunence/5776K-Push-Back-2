@@ -19,7 +19,7 @@ void sensorInit() {
 //begin all tasks
 void taskInit() {
     pros::Task intakeTask(runIntake, "intake task");
-    //pros::Task consoleTask(runConsole, "console task");
+    pros::Task consoleTask(runConsole, "console task");
     pros::Task pistonTask(runPistons, "piston task");
     //pros::Task colorTask(runColorSort, "color task");
     pros::Task screenTask(runScreen, "screen task");
@@ -51,10 +51,11 @@ void runConsole() {
     while(true) {
         lemlib::Pose pose = chassis.getPose();
 
-        std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
-        std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
-        std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
-        std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
+    
+        // std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
+        // std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
+        // std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
+        // std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
 
         pros::delay(500);
     }

@@ -11,7 +11,8 @@ pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
 pros::ADIDigitalOut littleWill ('C'); 
 pros::ADIDigitalOut descore ('A');
 pros::ADIDigitalOut trapdoor ('B');
-pros::ADIDigitalOut colorPiston ('D');
+pros::ADIDigitalOut hood('D');
+//pros::ADIDigitalOut colorPiston ('D');
 
 
 //sensor definitions

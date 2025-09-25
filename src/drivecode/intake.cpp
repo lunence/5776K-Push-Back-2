@@ -31,33 +31,33 @@ void runIntake() {
                 break;
             }
 
-            case 1: { //long goal
+            case 1: { //intake
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(velValue);
                 break; 
             }
 
-            case 2: { //mid goal
-                bottomRoller.move_voltage(velValue);
-                topRoller.move_voltage(-velValue);
-                break;
-            }
-
-            case 3: { //low goal
+            case 2: { //outtake
                 bottomRoller.move_voltage(-velValue);
                 topRoller.move_voltage(-velValue);
                 break;
             }
 
-            case 4: { //load intake (only bottom rollers)
-                bottomRoller.move_voltage(velValue);
-                topRoller.move_voltage(0); 
+            case 3: { //low goal
+                bottomRoller.move_voltage(0);
+                topRoller.move_voltage(-velValue);
                 break;
             }
 
+            // case 4: { //load intake (only bottom rollers)
+            //     bottomRoller.move_voltage(velValue);
+            //     topRoller.move_voltage(0); 
+            //     break;
+            // }
+
         }
 
-        if(trapdoorState == 1){
+        if(true){
             bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
 
              if (inRange && !prevInRange) {  
@@ -72,7 +72,8 @@ void runIntake() {
             prevInRange = false;
         }
 
-        }
+        std::cout<<"block count: "<<blockCount<<"\n";
+    }
 
         
 
@@ -86,12 +87,9 @@ void updateIntake() {
     //     intakeState = 0;
     // }
 
-    std::cout<<"running\n";
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
-        std::cout<<"pressed L1\n";
         if(!onePressed) {
-            std::cout<<"toggle\n";
             onePressed = 1;
             if (intakeState == 1) {
                 intakeState = 0;
@@ -104,9 +102,7 @@ void updateIntake() {
     }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
-        std::cout<<"pressed L2\n";
         if(!twoPressed) {
-            std::cout<<"toggle\n";
             twoPressed = true;
             if (intakeState == 2) {
                 intakeState = 0;
@@ -118,7 +114,7 @@ void updateIntake() {
         twoPressed = false;
     }
     
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) { //r1, low goal (standard), state 3
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) { //r1, low goal (standard), state 3
         if(!threePressed) {
             threePressed = true;
             if (intakeState == 3) {
@@ -131,18 +127,18 @@ void updateIntake() {
         threePressed = false;
     }
 
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, load intake, state 4
-        if(!fourPressed) {
-            fourPressed = true;
-            if (intakeState == 4) {
-                intakeState = 0;
-            } else {
-                intakeState = 4;
-            }
-        }
-    } else {
-        fourPressed = false;
-    }
+    // if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, load intake, state 4
+    //     if(!fourPressed) {
+    //         fourPressed = true;
+    //         if (intakeState == 4) {
+    //             intakeState = 0;
+    //         } else {
+    //             intakeState = 4;
+    //         }
+    //     }
+    // } else {
+    //     fourPressed = false;
+    // }
         
 
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //toggle voltage

@@ -11,6 +11,7 @@ extern pros::MotorGroup rightMotors;
 extern pros::ADIDigitalOut littleWill;
 extern pros::ADIDigitalOut descore;
 extern pros::ADIDigitalOut trapdoor;
+extern pros::ADIDigitalOut hood;
 extern pros::ADIDigitalOut colorPiston;
 
 //sensor declarations
