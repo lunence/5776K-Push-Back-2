@@ -45,7 +45,7 @@ void runIntake() {
 
             case 3: { //low goal
                 bottomRoller.move_voltage(0);
-                topRoller.move_voltage(-velValue);
+                topRoller.move_voltage(velValue);
                 break;
             }
 
