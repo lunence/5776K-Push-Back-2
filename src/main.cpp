@@ -4,7 +4,7 @@
 #include "drivecode/util.hpp"
 #include "lemlib/chassis/chassis.hpp"
 #include "pros/misc.h"
-#include "drivecode/color.hpp"
+#include "drivecode/sensors.hpp"
 #include "autonomous/autonSelector.hpp"
 #include "autonomous/autons.hpp"
 #include "pros/motors.h"
@@ -24,7 +24,7 @@ void initialize() {
 	pros::lcd::initialize();
 
 	chassis.calibrate();
-	// chassis.setPose(0, 0, 0);
+	chassis.setPose(0, 0, 0);
 
 	//autonSelector();
 
@@ -44,6 +44,10 @@ void competition_initialize() {
 void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
 	chooseAuton();
+	// chassis.turnToHeading(90, 1000);
+	chassis.moveToPoint(0, 44, 2000);
+	pros::delay(1000);
+	chassis.moveToPoint(0,0,2000,{.forwards = false});
 }
 
 void opcontrol() {
@@ -55,7 +59,6 @@ void opcontrol() {
 		//subsystems
 		updateIntake();
 		updatePistons();
-		updateColorSort();
 
 		//drive
 		//for single stick arcade, turn pros::E_CONTROLLER_ANALOG_RIGHT_X into pros::E_CONTROLLER_DIGITAL_LEFT_X

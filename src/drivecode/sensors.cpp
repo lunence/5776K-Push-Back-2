@@ -1,4 +1,4 @@
-#include "color.hpp"
+#include "sensors.hpp"
 #include "pros/misc.h"
 
 
@@ -8,8 +8,14 @@ bool colorDetected = false;
 
 int color = 0;
 
-void updateColorSort(){
-        
+int blockCount = 0;
+int target = 3;
+
+bool prevInRange = false; 
+bool blockDetected = false;
+
+void colorSortRumble(){
+    while(true) {    
         if(color == 1) { //score red, sort blue
             if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
                 if(!colorDetected) {
@@ -40,8 +46,37 @@ void updateColorSort(){
                 }
 
         }
-    
+    }
 }
+
+void distIntakeStop() {
+    while(true) {
+        if(trapDescoreState == 1){
+            bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
+            if(inRange) {
+                if(!blockDetected) {
+                    blockDetected = true;
+                    blockCount++;
+                    if (blockCount >= target) {
+                        intakeState = 3;     
+                    }
+                }
+            } else {
+                blockDetected = false;
+            }
+
+            pros::screen::print(pros::E_TEXT_MEDIUM, 2, "blockCount: %.3f", blockCount);
+        } else {  
+            blockCount = 0;
+            blockDetected = false;                          
+            blockCount  = 0; //trapfoor closed
+            prevInRange = false;
+        }
+
+        pros::delay(10);
+    }
+}
+
 
 
 // bool colorPressed;

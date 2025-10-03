@@ -1,4 +1,4 @@
 #include "autonomous/lemlibMods.hpp"
 
-int maxLinearSpeed = 100;
-int maxAngularSpeed = 100;
+int maxLinearSpeed = 70;
+int maxAngularSpeed = 90;

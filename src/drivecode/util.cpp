@@ -1,6 +1,7 @@
 #include "drivecode/util.hpp"
 #include "drivecode/objects.hpp"
 #include "autonomous/autonSelector.hpp"
+#include "drivecode/sensors.hpp"
 #include <iostream>
 
 
@@ -21,7 +22,8 @@ void taskInit() {
     pros::Task intakeTask(runIntake, "intake task");
     pros::Task consoleTask(runConsole, "console task");
     pros::Task pistonTask(runPistons, "piston task");
-    //pros::Task colorTask(runColorSort, "color task");
+    pros::Task colorTask(colorSortRumble, "color task");
+    pros::Task distanceTask(distIntakeStop, "distance task");
     pros::Task screenTask(runScreen, "screen task");
     pros::Task controllerTask(runController, "controller task");
 
@@ -39,7 +41,8 @@ void runScreen() {
         pros::screen::print(pros::E_TEXT_MEDIUM, 5, "bottom wattage: %.3f", bottomRoller.get_power());
         pros::screen::print(pros::E_TEXT_MEDIUM, 6, "Left Color: %.3f", colorLeft.get_hue());
         pros::screen::print(pros::E_TEXT_MEDIUM, 7, "Right Color: %.3f", colorRight.get_hue());
-        pros::screen::print(pros::E_TEXT_MEDIUM, 8, "odom rotations: %.3f", vertRotation.get_position()/36000.0);
+        pros::screen::print(pros::E_TEXT_MEDIUM, 8, "distance: %.3f", distanceSense.get());
+        //pros::screen::print(pros::E_TEXT_MEDIUM, 8, "odom rotations: %.3f", vertRotation.get_position()/36000.0);
 
         pros::delay(50);
     }
@@ -52,18 +55,23 @@ void runConsole() {
         lemlib::Pose pose = chassis.getPose();
 
     
-        // std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
-        // std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
-        // std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
-        // std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
+        std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
+        std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
+        std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
+        std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
 
         pros::delay(500);
+
+        
     }
 }
 
 void runController() {
-    if(velValue == 12000)
-        controller.set_text(0, 0, "100%");
-    else if(velValue == 12000 * 0.6)
-        controller.set_text(0, 0, "60% ");
+    while (true) {
+        if(velValue == 12000)
+            controller.set_text(0, 0, "100%");
+        else if(velValue == 12000 * 0.6)
+            controller.set_text(0, 0, "60% ");
+    
+    }
 }

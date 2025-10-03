@@ -4,6 +4,7 @@
 #include "pistons.hpp"
 
 extern int color;
+extern int blockCount;
 
-void updateColorSort();
-void runColorSort();
+void colorSortRumble();
+void distIntakeStop();

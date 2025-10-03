@@ -9,8 +9,8 @@ pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
 
 //piston definitions
 pros::ADIDigitalOut littleWill ('B'); 
-pros::ADIDigitalOut descore ('H');
-pros::ADIDigitalOut trapdoor ('G');
+pros::ADIDigitalOut trapDescore ('H');
+//pros::ADIDigitalOut trapdoor ('G');
 pros::ADIDigitalOut hood('A');
 //pros::ADIDigitalOut colorPiston ('D');
 
@@ -21,14 +21,14 @@ pros::Optical colorRight(3); //TODO: fix port
 pros::Distance distance(1);
 pros::Imu imu(16);
 pros::Rotation horizRotation(4);
-pros::Rotation vertRotation(2);
+pros::Rotation vertRotation(-2);
 pros::Distance distanceSense(1); 
 
 //drivetrain definitions
 lemlib::TrackingWheel horizOdom(
     &horizRotation, 
     lemlib::Omniwheel::NEW_2, 
-    -2.637
+    0
 );
 
 lemlib::TrackingWheel vertOdom(
@@ -55,9 +55,9 @@ lemlib::Drivetrain drivetrain(
 );
 
 lemlib::ControllerSettings lateralController( //TODO: tune error zones, pids
-    4.6,
+    3.8,
     0,
-    0.1,
+    0,
     3,
     1,
     100,
@@ -67,9 +67,9 @@ lemlib::ControllerSettings lateralController( //TODO: tune error zones, pids
 );
 
 lemlib::ControllerSettings angularController( //TODO: tune error zones, pids
-    3.35, 
+    3, 
     0,
-    26, 
+    11, 
     3,
     1.5,
     100,

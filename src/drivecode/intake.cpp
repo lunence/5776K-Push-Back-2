@@ -15,11 +15,7 @@ bool fourPressed = false;
 
 int velState = 0;
 
-int blockCount = 0;
-int target = 3;
 
-bool prevInRange = false; 
-bool blockDetected = false;
 
 void runIntake() {
 
@@ -44,7 +40,7 @@ void runIntake() {
                 break;
             }
 
-            case 3: { //low goal
+            case 3: { //only bottom
                 bottomRoller.move_voltage(0);
                 topRoller.move_voltage(velValue);
                 break;
@@ -57,35 +53,9 @@ void runIntake() {
             // }
 
         }
+
         
-
-        if(true){
-            bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
-            std::cout<<"inRange: "<<inRange<<"\n";
-            if(inRange) {
-                if(!blockDetected) {
-                    blockDetected = true;
-                    blockCount++;
-                    if (blockCount >= target) {
-                        intakeState = 5;     
-                    }
-                }
-            } else {
-                blockDetected = false;
-            }
-
-            std::cout<<"block count: "<<blockCount<<"\n";
-            std::cout<<"trapdoor state: "<<trapdoorState<<"\n\n";
-        } else {                            
-            blockCount  = 0; //trapfoor closed
-            prevInRange = false;
-        }
-
-        pros::delay(10);
     }
-
-        
-
         
 
 }
@@ -109,6 +79,10 @@ void updateIntake() {
     } else {
         onePressed = false;
     }
+
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+        intakeState = 0;
+    };
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
         if(!twoPressed) {
