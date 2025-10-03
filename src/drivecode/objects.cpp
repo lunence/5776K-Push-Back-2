@@ -8,15 +8,15 @@ pros::MotorGroup leftMotors({-15, -13, -14}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
 
 //piston definitions
-pros::ADIDigitalOut littleWill ('C'); 
-pros::ADIDigitalOut descore ('A');
-pros::ADIDigitalOut trapdoor ('B');
-pros::ADIDigitalOut hood('D');
+pros::ADIDigitalOut littleWill ('B'); 
+pros::ADIDigitalOut descore ('H');
+pros::ADIDigitalOut trapdoor ('G');
+pros::ADIDigitalOut hood('A');
 //pros::ADIDigitalOut colorPiston ('D');
 
 
 //sensor definitions
-pros::Optical colorLeft(10); //TODO: fix port
+pros::Optical colorLeft(12); //TODO: fix port
 pros::Optical colorRight(3); //TODO: fix port
 pros::Distance distance(1);
 pros::Imu imu(16);

@@ -8,19 +8,20 @@ int intakeState = 0;
 int velValue = 12000;
 bool velButtonPressed = false;
 
-bool onePressed = 0;
+bool onePressed = false;
 bool twoPressed = false;
 bool threePressed = false;
 bool fourPressed = false;
 
 int velState = 0;
 
+int blockCount = 0;
+int target = 3;
+
+bool prevInRange = false; 
+bool blockDetected = false;
+
 void runIntake() {
-    int blockCount = 0;
-    int target = 4;
-
-    bool prevInRange = false; 
-
 
     while(true) {
         //std::cout<<"intake vel: "<<bottomRoller.get_voltage()<<".  expected vel: "<<velValue<<"\n";
@@ -56,28 +57,36 @@ void runIntake() {
             // }
 
         }
+        
 
-        if(trapdoorState == 1){
+        if(true){
             bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
-
-             if (inRange && !prevInRange) {  
-                blockCount++;
-                if (blockCount >= target) {
-                    intakeState = 5;     
+            std::cout<<"inRange: "<<inRange<<"\n";
+            if(inRange) {
+                if(!blockDetected) {
+                    blockDetected = true;
+                    blockCount++;
+                    if (blockCount >= target) {
+                        intakeState = 5;     
+                    }
                 }
+            } else {
+                blockDetected = false;
             }
-            prevInRange = inRange; // im not sure if my logic is right but this shd stop the same ball from being counted over and over ?
+
+            std::cout<<"block count: "<<blockCount<<"\n";
+            std::cout<<"trapdoor state: "<<trapdoorState<<"\n\n";
         } else {                            
             blockCount  = 0; //trapfoor closed
             prevInRange = false;
         }
 
-        std::cout<<"block count: "<<blockCount<<"\n";
+        pros::delay(10);
     }
 
         
 
-        pros::delay(10);
+        
 
 }
 
@@ -90,7 +99,7 @@ void updateIntake() {
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
         if(!onePressed) {
-            onePressed = 1;
+            onePressed = true;
             if (intakeState == 1) {
                 intakeState = 0;
             } else {
@@ -98,7 +107,7 @@ void updateIntake() {
             }
         } 
     } else {
-        onePressed = 0;
+        onePressed = false;
     }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
