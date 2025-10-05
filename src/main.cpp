@@ -42,12 +42,14 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	chooseAuton();
+
+	longGoalRight();
+	// chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
+	// chooseAuton();
 	// chassis.turnToHeading(90, 1000);
-	chassis.moveToPoint(0, 44, 2000);
-	pros::delay(1000);
-	chassis.moveToPoint(0,0,2000,{.forwards = false});
+	// chassis.moveToPoint(0, 44, 2000);
+	// pros::delay(1000);
+	// chassis.moveToPoint(0,0,2000,{.forwards = false});
 }
 
 void opcontrol() {

@@ -1,5 +1,15 @@
-//  #include "autons.hpp"
-//  #include <math.h>
+ #include "autons.hpp"
+ #include <math.h>
+
+
+void longGoalRight() {
+    chassis.moveToPoint(0, 31,1500);
+
+    chassis.turnToHeading(41, 1000);
+
+
+}
+
 
 // void longGoalRight() {
 //     //go to match loader
