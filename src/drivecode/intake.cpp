@@ -45,6 +45,11 @@ void runIntake() {
                 topRoller.move_voltage(velValue);
                 break;
             }
+             case 4: { //only bottom
+                bottomRoller.move_voltage(velValue);
+                topRoller.move_voltage(0);
+                break;
+            }
 
             // case 4: { //load intake (only bottom rollers)
             //     bottomRoller.move_voltage(velValue);
