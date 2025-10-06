@@ -22,7 +22,6 @@ pros::Distance distance(1);
 pros::Imu imu(16);
 pros::Rotation horizRotation(4);
 pros::Rotation vertRotation(-11);
-pros::Distance distanceSense(1); 
 
 //drivetrain definitions
 lemlib::TrackingWheel horizOdom(

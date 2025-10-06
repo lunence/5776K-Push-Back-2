@@ -52,7 +52,7 @@ void colorSortRumble(){
 void distIntakeStop() {
     while(true) {
         if(trapDescoreState == 1){
-            bool inRange = (distanceSense.get() > 0 && distanceSense.get() <= 75); //change this didnt test yet 
+            bool inRange = (distance.get_distance() > 0 && distance.get_distance() <= 75); //change this didnt test yet 
             if(inRange) {
                 if(!blockDetected) {
                     blockDetected = true;
@@ -65,7 +65,6 @@ void distIntakeStop() {
                 blockDetected = false;
             }
 
-            pros::screen::print(pros::E_TEXT_MEDIUM, 2, "blockCount: %.3f", blockCount);
         } else {  
             blockCount = 0;
             blockDetected = false;                          

@@ -40,9 +40,11 @@ void runScreen() {
         pros::screen::print(pros::E_TEXT_MEDIUM, 4, "top wattage: %.3f", topRoller.get_power());
         pros::screen::print(pros::E_TEXT_MEDIUM, 5, "bottom wattage: %.3f", bottomRoller.get_power());
         pros::screen::print(pros::E_TEXT_MEDIUM, 6, "Left Color: %.3f", colorLeft.get_hue());
-        pros::screen::print(pros::E_TEXT_MEDIUM, 7, "Right Color: %.3f", colorRight.get_hue());
-        pros::screen::print(pros::E_TEXT_MEDIUM, 8, "distance: %.3f", distanceSense.get());
+        //pros::screen::print(pros::E_TEXT_MEDIUM, 7, "Right Color: %.3f", colorRight.get_hue());
+        //pros::screen::print(pros::E_TEXT_MEDIUM, 7, "distance: %.3f", distance.get_confidence());
         //pros::screen::print(pros::E_TEXT_MEDIUM, 8, "odom rotations: %.3f", vertRotation.get_position()/36000.0);
+        //pros::screen::print(pros::E_TEXT_MEDIUM, 8, "blockCount: %.3f", blockCount);
+
 
         pros::delay(50);
     }
@@ -54,11 +56,14 @@ void runConsole() {
     while(true) {
         lemlib::Pose pose = chassis.getPose();
 
-    
-        std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
-        std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
-        std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
-        std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
+        std::cout<<"distance: "<<distance.get_distance()<<"\n";
+        std::cout<<"block count: "<<blockCount<<"\n\n";
+
+
+        // std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
+        // std::cout<<"Y: "<<std::to_string(pose.y)<<"\n";
+        // std::cout<<"Theta: "<<std::to_string(pose.theta)<<"\n";
+        // std::cout<<"left color: "<<colorLeft.get_hue()<<"\n\n";
 
         pros::delay(500);
 
