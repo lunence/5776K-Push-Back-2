@@ -12,11 +12,13 @@ void longGoalLeft() {
     //go to mid goal
     chassis.turnToHeading(42.9, 1000);
     chassis.moveToPoint(1.27, 33.95, 1500);
-    trapDescoreState = 0; 
+    trapDescoreState = 1; 
+    pros::delay(2000);
     intakeState = 1;
     pros::delay(350); //auton one ball
     intakeState = 0;
-    trapDescoreState = 1;
+    trapDescoreState = 0;
+    pros::delay(150);
 
 
     // driving reverse to the matchload
@@ -28,21 +30,27 @@ void longGoalLeft() {
     intakeState = 3;
     
     // driving into the matchloader
-    chassis.moveToPoint(-31.123, -10, 1000);
-    
-    // //back up from match loader
-    // chassis.moveToPoint(-31.4, 0.4, 1000, {.forwards = false});
-    // chassis.waitUntilDone();
-    // hoodState = 1;
-    // littleWillState = 0;
+    chassis.moveToPoint(-31.123, -12, 1000);
+    pros::delay(3000); // wait to intake
 
     
-    // //turn to long goal and score
-    // chassis.turnToHeading(0, 1000);
-    // chassis.moveToPoint(-31.4, 13.66, 1000);
-    // chassis.waitUntilDone();
-    // hoodState = 1;
-    // intakeState = 1;
+    // //back up from match loader
+    chassis.moveToPoint(-31.4, 0.4, 1000, {.forwards = false});
+    chassis.waitUntilDone();
+    hoodState = 1;
+    littleWillState = 0;
+
+    
+    //turn to long goal and score
+    trapDescoreState = 1;
+    pros::delay(1500);
+    chassis.turnToHeading(-4, 1000);
+    chassis.waitUntilDone();
+    chassis.moveToPoint(-33, 15.51, 1000, {.maxSpeed = 40});
+    chassis.turnToHeading(4, 1000);
+    chassis.waitUntilDone();
+    hoodState = 1;
+    intakeState = 1;
 
 
 
