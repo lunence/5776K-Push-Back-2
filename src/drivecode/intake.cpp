@@ -41,13 +41,13 @@ void runIntake() {
             }
 
             case 3: { //only bottom
-                bottomRoller.move_voltage(0);
-                topRoller.move_voltage(velValue);
-                break;
-            }
-             case 4: { //only bottom
                 bottomRoller.move_voltage(velValue);
                 topRoller.move_voltage(0);
+                break;
+            }
+             case 4: { //only top
+                bottomRoller.move_voltage(0);
+                topRoller.move_voltage(velValue);
                 break;
             }
 
@@ -67,9 +67,9 @@ void runIntake() {
 
 
 void updateIntake() {
-    // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //r2, stop all intake, state 0
-    //     intakeState = 0;
-    // }
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) { //y, stop all intake, state 0
+        intakeState = 0;
+    }
 
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1

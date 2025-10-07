@@ -26,6 +26,7 @@ void taskInit() {
     pros::Task distanceTask(distIntakeStop, "distance task");
     pros::Task screenTask(runScreen, "screen task");
     pros::Task controllerTask(runController, "controller task");
+    pros::Task autonFunctTask(autonOneBlock, "auton task");
 
 }
 

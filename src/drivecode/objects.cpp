@@ -1,8 +1,8 @@
 #include "main.h"
 
 //motor definitions
-pros::Motor bottomRoller(12, pros::MotorGearset::blue);
-pros::Motor topRoller(20, pros::MotorGearset::blue);
+pros::Motor bottomRoller(20, pros::MotorGearset::blue);
+pros::Motor topRoller(12, pros::MotorGearset::blue);
 
 pros::MotorGroup leftMotors({-15, -13, -14}, pros::MotorGearset::blue);
 pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
@@ -47,7 +47,7 @@ lemlib::OdomSensors odomSensors(
 lemlib::Drivetrain drivetrain(
     &leftMotors,
     &rightMotors,
-    0,
+    29,
     lemlib::Omniwheel::NEW_325,
     450,   
     8

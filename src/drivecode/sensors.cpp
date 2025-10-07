@@ -3,20 +3,20 @@
 
 
 //color sort RUMBLE 
+bool autonOneBlockActive = false;
 
 bool colorDetected = false;
 
-int color = 0;
+//int color = 0;
 
 int blockCount = 0;
 int target = 3;
 
-bool prevInRange = false; 
-bool blockDetected = false;
+
 
 void colorSortRumble(){
     while(true) {    
-        if(color == 1) { //score red, sort blue
+        if(autonColor == 1) { //score red, sort blue
             if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
                 if(!colorDetected) {
                     colorDetected = true;
@@ -31,7 +31,7 @@ void colorSortRumble(){
         
         }
             
-        if(color == 2) { //score blue, sort red
+        if(autonColor == 2) { //score blue, sort red
             if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
                 if(!colorDetected) {
                     colorDetected = true;
@@ -50,6 +50,7 @@ void colorSortRumble(){
 }
 
 void distIntakeStop() {
+    bool blockDetected = false;
     while(true) {
         if(trapDescoreState == 1){
             bool inRange = (distance.get_distance() > 0 && distance.get_distance() <= 75); //change this didnt test yet 
@@ -68,11 +69,28 @@ void distIntakeStop() {
         } else {  
             blockCount = 0;
             blockDetected = false;                          
-            blockCount  = 0; //trapfoor closed
-            prevInRange = false;
         }
 
         pros::delay(10);
+    }
+}
+
+
+void autonOneBlock() {
+    bool blockDetected = false;
+    bool currentBlock = false;
+    while(autonOneBlockActive) {
+        bool inRange = colorLeft.get_proximity() > 0 && colorLeft.get_proximity() < 75 || colorRight.get_proximity() > 0 && colorRight.get_proximity() < 75;
+        if(inRange) {
+            if(!blockDetected) {
+                blockDetected = true;
+                currentBlock = true;
+                if(currentBlock)
+                    intakeState = 0;
+            }
+        } else {
+            blockDetected = false;
+        }
     }
 }
 
@@ -86,7 +104,7 @@ void distIntakeStop() {
 //     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)){
 //         if(!colorPressed) { //if the button is pressed
 //             color++; //add color state by increment of 1
-//             if(color == 3) { //if 3, run fuction, 
+//             if(autonColor == 3) { //if 3, run fuction, 
 //                 color = 0; // off
 //             }
 //         }
@@ -111,12 +129,12 @@ void distIntakeStop() {
 
 // void runColorSort(){
 //     while(true) {
-//         if(color == 0) {
+//         if(autonColor == 0) {
 //             pros::delay(10);
 //             continue;
 //         }
         
-//         if(color == 1) { //score red, sort blue
+//         if(autonColor == 1) { //score red, sort blue
 //             if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
 //                 if(!colorDetected) {
 //                     colorDetected = true;
@@ -132,7 +150,7 @@ void distIntakeStop() {
         
 //         }
             
-//         if(color == 2) { //score blue, sort red
+//         if(autonColor == 2) { //score blue, sort red
 //             if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
 //                 if(!colorDetected) {
 //                     colorDetected = true;
