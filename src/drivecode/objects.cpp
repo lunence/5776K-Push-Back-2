@@ -9,8 +9,8 @@ pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
 
 //piston definitions
 pros::ADIDigitalOut littleWill ('B'); 
-pros::ADIDigitalOut trapDescore ('H');
-//pros::ADIDigitalOut trapdoor ('G');
+pros::ADIDigitalOut descore ('D');
+pros::ADIDigitalOut trapdoor ('C');
 pros::ADIDigitalOut hood('A');
 //pros::ADIDigitalOut colorPiston ('D');
 

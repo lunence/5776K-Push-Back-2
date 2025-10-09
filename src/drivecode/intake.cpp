@@ -67,7 +67,7 @@ void runIntake() {
 
 
 void updateIntake() {
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) { //y, stop all intake, state 0
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //a, stop all intake, state 0
         intakeState = 0;
     }
 

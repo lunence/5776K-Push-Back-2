@@ -2,6 +2,7 @@
 #include "pros/colors.h"
 #include "pros/screen.h"
 #include "pros/screen.hpp"
+#include "autonomous/autons.hpp"
 #include <iostream>
 
 bool optionSelected = false;
@@ -39,19 +40,19 @@ void autonSelector() {
     pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
     pros::screen::fill_rect(10, 10, 250, 50);
     pros::screen::set_pen(pros::c::COLOR_WHITE);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 20, "Auton 1"); //text 10 pixels below start of box
+    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 20, "Long Goal Left"); //text 10 pixels below start of box
 
     //button 2 printing
     pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
     pros::screen::fill_rect(10, 70, 250, 110); //20 pixels below prev button
     pros::screen::set_pen(pros::c::COLOR_WHITE);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 80, "Auton 2");
+    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 80, "Long Goal Right");
 
     //button 3 printing
     pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
     pros::screen::fill_rect(10, 130, 250, 170); //20 pixels below prev button
     pros::screen::set_pen(pros::c::COLOR_WHITE);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Auton 3");
+    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Nothing");
 
     pros::delay(500);
     optionSelected = false;
@@ -103,7 +104,7 @@ void autonSelector() {
             pros::screen::set_pen(pros::c::COLOR_GREEN);
             pros::screen::fill_rect(10, 10, 250, 50);
             pros::screen::set_pen(pros::c::COLOR_WHITE);
-            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 20, "Auton 1 Selected!");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 20, "Long Goal Left Selected!");
             pros::delay(500);
             pros::screen::erase();
         }
@@ -115,7 +116,7 @@ void autonSelector() {
             pros::screen::set_pen(pros::c::COLOR_GREEN);
             pros::screen::fill_rect(10, 70, 250, 110);
             pros::screen::set_pen(pros::c::COLOR_WHITE);
-            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 80, "Auton 2 Selected!");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 80, "Long Goal Right Selected!");
             pros::delay(500);
             pros::screen::erase();
         }
@@ -127,7 +128,7 @@ void autonSelector() {
             pros::screen::set_pen(pros::c::COLOR_GREEN);
             pros::screen::fill_rect(10, 130, 250, 170);
             pros::screen::set_pen(pros::c::COLOR_WHITE);
-            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Auton 3 Selected!");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Nothing Selected!");
             pros::delay(500);
             pros::screen::erase();
         }
@@ -140,11 +141,11 @@ void chooseAuton() {
     if(autonColor == 'R') {
 		switch(auton) {
 			case 1: {
-				std::cout<<"red auton 1\n";
+				longGoalLeft();
 				break;
 			}
 			case 2: {
-				std::cout<<"red auton 2\n";
+				longGoalRight();
 				break;
 			}
 			case 3: {
@@ -155,11 +156,11 @@ void chooseAuton() {
 	} else if(autonColor == 'B') {
 		switch(auton) {
 			case 1: {
-				std::cout<<"blue auton 1\n";
+				longGoalLeft();
 				break;
 			}
 			case 2: {
-				std::cout<<"blue auton 2\n";
+				longGoalRight();
 				break;
 			}
 			case 3: {

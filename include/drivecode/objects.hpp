@@ -9,8 +9,8 @@ extern pros::MotorGroup rightMotors;
 
 //piston declarations
 extern pros::ADIDigitalOut littleWill;
-extern pros::ADIDigitalOut trapDescore;
-//extern pros::ADIDigitalOut trapdoor;
+extern pros::ADIDigitalOut descore;
+extern pros::ADIDigitalOut trapdoor;
 extern pros::ADIDigitalOut hood;
 //extern pros::ADIDigitalOut colorPiston;
 

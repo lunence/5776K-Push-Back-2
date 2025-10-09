@@ -45,8 +45,9 @@ void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
 	chassis.setPose(0, 0, 0);
 
-	longGoalLeft();
-	// chooseAuton();
+	//longGoalLeft();
+	//longGoalRight();
+	chooseAuton();
 	// chassis.turnToHeading(90, 1000);
 	// chassis.moveToPoint(0, 44, 2000);
 	// pros::delay(1000);

@@ -3,8 +3,8 @@
 #include <iostream>
 
 int littleWillState = 0;
-int trapDescoreState = 0;
-//int trapdoorState = 0;
+int descoreState = 0;
+int trapdoorState = 0;
 int hoodState = 0;
 
 bool littleWillPressed = false;
@@ -28,13 +28,13 @@ void updatePistons() {
     }
 
     //descore
-    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //right
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) { //right
         if(!descorePressed) {
             descorePressed = true;
-            if(trapDescoreState == 0) {
-                trapDescoreState = 1;
-            } else if (trapDescoreState == 1){
-                trapDescoreState = 0;
+            if(descoreState == 0) {
+                descoreState = 1;
+            } else if (descoreState == 1){
+                descoreState = 0;
             }
         }
     } else {
@@ -55,19 +55,19 @@ void updatePistons() {
         hoodPressed = false;
     } 
 
-    // //trapdoor
-    // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //right
-    //     if(!trapPressed) {
-    //         trapPressed = true;
-    //         if(trapdoorState == 0) {
-    //             trapdoorState = 1;
-    //         } else if (trapdoorState == 1){
-    //             trapdoorState = 0;
-    //         }
-    //     }
-    // } else {
-    //     trapPressed = false;
-    // } 
+    //trapdoor
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) { //right
+        if(!trapPressed) {
+            trapPressed = true;
+            if(trapdoorState == 0) {
+                trapdoorState = 1;
+            } else if (trapdoorState == 1){
+                trapdoorState = 0;
+            }
+        }
+    } else {
+        trapPressed = false;
+    } 
 
 }
 
@@ -84,10 +84,10 @@ void runPistons() {
         } 
         
         //descore
-        if(trapDescoreState == 0) {
-            trapDescore.set_value(false);
-        } else if(trapDescoreState == 1) {
-            trapDescore.set_value(true);
+        if(descoreState == 0) {
+            descore.set_value(false);
+        } else if(descoreState == 1) {
+            descore.set_value(true);
         }
 
         //hood
@@ -97,12 +97,12 @@ void runPistons() {
             hood.set_value(true);
         }
 
-        // //trapdoor
-        // if(trapdoorState == 0) {
-        //     trapdoor.set_value(false);
-        // } else if(trapdoorState == 1) {
-        //     trapdoor.set_value(true);
-        // }
+        //trapdoor
+        if(trapdoorState == 0) {
+            trapdoor.set_value(false);
+        } else if(trapdoorState == 1) {
+            trapdoor.set_value(true);
+        }
 
         pros::delay(10);
     }

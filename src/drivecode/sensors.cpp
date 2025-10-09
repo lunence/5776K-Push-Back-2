@@ -52,7 +52,7 @@ void colorSortRumble(){
 void distIntakeStop() {
     bool blockDetected = false;
     while(true) {
-        if(trapDescoreState == 1){
+        if(trapdoorState == 1){
             bool inRange = (distance.get_distance() > 0 && distance.get_distance() <= 75); //change this didnt test yet 
             if(inRange) {
                 if(!blockDetected) {
