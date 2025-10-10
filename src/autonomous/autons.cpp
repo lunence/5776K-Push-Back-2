@@ -85,11 +85,11 @@ void longGoalRight() {
     intakeState = 3;
     
     // driving into the matchloader
-    chassis.moveToPoint(32.123, -12, 1000);
+    chassis.moveToPoint(32.123, -13, 1000);
     pros::delay(1000); // wait to intake
 
     
-    // //back up from match loader
+    //back up from match loader
     chassis.moveToPoint(32.4, 0.4, 1000, {.forwards = false});
     chassis.waitUntilDone();
     hoodState = 1;

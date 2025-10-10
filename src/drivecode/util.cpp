@@ -57,8 +57,8 @@ void runConsole() {
     while(true) {
         lemlib::Pose pose = chassis.getPose();
 
-        std::cout<<"distance: "<<distance.get_distance()<<"\n";
-        std::cout<<"block count: "<<blockCount<<"\n\n";
+        // std::cout<<"distance: "<<distance.get_distance()<<"\n";
+        // std::cout<<"block count: "<<blockCount<<"\n\n";
 
 
         // std::cout<<"X: "<<std::to_string(pose.x)<<"\n";
@@ -77,7 +77,6 @@ void runController() {
         if(velValue == 12000)
             controller.set_text(0, 0, "100%");
         else if(velValue == 12000 * 0.6)
-            controller.set_text(0, 0, "60% ");
-    
+            controller.set_text(0, 0, "60%");
     }
 }

@@ -15,10 +15,7 @@ bool fourPressed = false;
 
 int velState = 0;
 
-
-
 void runIntake() {
-
     while(true) {
         //std::cout<<"intake vel: "<<bottomRoller.get_voltage()<<".  expected vel: "<<velValue<<"\n";
         switch(intakeState) {
@@ -59,10 +56,9 @@ void runIntake() {
 
         }
 
+        pros::delay(10);
         
     }
-        
-
 }
 
 
@@ -70,7 +66,6 @@ void updateIntake() {
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //a, stop all intake, state 0
         intakeState = 0;
     }
-
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
         if(!onePressed) {
@@ -87,7 +82,7 @@ void updateIntake() {
 
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
         intakeState = 0;
-    };
+    }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
         if(!twoPressed) {

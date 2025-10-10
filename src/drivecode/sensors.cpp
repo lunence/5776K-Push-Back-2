@@ -1,51 +1,41 @@
 #include "sensors.hpp"
 #include "pros/misc.h"
 
-
 //color sort RUMBLE 
 bool autonOneBlockActive = false;
-
-bool colorDetected = false;
 
 //int color = 0;
 
 int blockCount = 0;
 int target = 3;
 
-
-
-void colorSortRumble(){
+void colorSortRumble() {
     while(true) {    
-        if(autonColor == 1) { //score red, sort blue
-            if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
-                if(!colorDetected) {
-                    colorDetected = true;
-                    controller.rumble(". - . -");
-                    
-                }
+        bool getItOutOfHere = false;
+        bool colorDetected = false;
+        std::cout<<colorLeft.get_hue()<<"\n";
 
-            } 
-            else {
-                    colorDetected = false;
-                }    
-        
+        if(autonColor == 1) { //score red, sort blue
+            if(180 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 180 < colorRight.get_hue() && colorRight.get_hue() < 240) {
+                getItOutOfHere = true;
+            } else {
+                getItOutOfHere = false;
+            }
         }
             
-        if(autonColor == 2) { //score blue, sort red
+        else if(autonColor == 2) { //score blue, sort red
             if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
-                if(!colorDetected) {
-                    colorDetected = true;
-                    controller.rumble("- . - .");
-                   
-                }
+                getItOutOfHere = true;
+            } else {
+                getItOutOfHere = false;
             }
-
-            else 
-            {
-                    colorDetected = false;
-                }
-
         }
+
+        if(getItOutOfHere) {
+            controller.rumble("---");
+        }
+
+        pros::delay(10);
     }
 }
 
@@ -53,13 +43,15 @@ void distIntakeStop() {
     bool blockDetected = false;
     while(true) {
         if(trapdoorState == 1){
-            bool inRange = (distance.get_distance() > 0 && distance.get_distance() <= 75); //change this didnt test yet 
-            if(inRange) {
+            if(distance.get_distance() > 0 && distance.get_distance() < 76) {
+                std::cout<<"dist threshold reached"<<"\n";
                 if(!blockDetected) {
+                    std::cout<<"added block"<<"\n";
                     blockDetected = true;
                     blockCount++;
                     if (blockCount >= target) {
                         intakeState = 3;     
+                        std::cout<<"intake stop"<<"\n";
                     }
                 }
             } else {
@@ -91,6 +83,8 @@ void autonOneBlock() {
         } else {
             blockDetected = false;
         }
+
+        pros::delay(10);
     }
 }
 

@@ -67,8 +67,7 @@ void updatePistons() {
         }
     } else {
         trapPressed = false;
-    } 
-
+    }
 }
 
 void runPistons() {

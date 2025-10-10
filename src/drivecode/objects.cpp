@@ -16,7 +16,7 @@ pros::ADIDigitalOut hood('A');
 
 
 //sensor definitions
-pros::Optical colorLeft(12); //TODO: fix port
+pros::Optical colorLeft(10); //TODO: THIS IS THE ONE THAT'S WIRED
 pros::Optical colorRight(3); //TODO: fix port
 pros::Distance distance(1);
 pros::Imu imu(16);
