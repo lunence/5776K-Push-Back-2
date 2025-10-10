@@ -16,7 +16,7 @@ void colorSortRumble() {
         std::cout<<colorLeft.get_hue()<<"\n";
 
         if(autonColor == 1) { //score red, sort blue
-            if(180 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 180 < colorRight.get_hue() && colorRight.get_hue() < 240) {
+            if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
                 getItOutOfHere = true;
             } else {
                 getItOutOfHere = false;
