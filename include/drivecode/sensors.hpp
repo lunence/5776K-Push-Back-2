@@ -7,7 +7,11 @@
 //extern int color;
 extern int blockCount;
 extern bool autonOneBlockActive;
+extern bool distActive;
+extern bool topFilled;
+
 
 void colorSortRumble();
 void distIntakeStop();
+void antiJam();
 void autonOneBlock();

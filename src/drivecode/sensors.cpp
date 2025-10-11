@@ -13,9 +13,9 @@ void colorSortRumble() {
     while(true) {    
         bool getItOutOfHere = false;
         bool colorDetected = false;
-        std::cout<<colorLeft.get_hue()<<"\n";
+        //std::cout<<colorLeft.get_hue()<<"\n";
 
-        if(autonColor == 1) { //score red, sort blue
+        if(autonColor == 'R') { //score red, sort blue
             if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
                 getItOutOfHere = true;
             } else {
@@ -23,7 +23,7 @@ void colorSortRumble() {
             }
         }
             
-        else if(autonColor == 2) { //score blue, sort red
+        else if(autonColor == 'B') { //score blue, sort red
             if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
                 getItOutOfHere = true;
             } else {
@@ -45,12 +45,11 @@ void distIntakeStop() {
     int count = 0;
 
     while(true) {
-
         if(trapdoorState == 0 && intakeState == 1) {
             if(distance.get_distance() > 0 && distance.get_distance() < 51) {
                 count++;
 
-                if(count = 200) {
+                if(count == 20) {
                     intakeState = 3;
                     count = 0;
                 }
@@ -80,6 +79,30 @@ void distIntakeStop() {
         //     blockCount = 0;
         //     blockDetected = false;                          
         // }
+
+        pros::delay(10);
+    }
+}
+
+void antiJam() {
+
+    int prevIntakeState = 0;
+    int count = 0;
+
+    while(true) {
+
+        if(prevIntakeState != intakeState) { //if intake state changes, delay so no startup errors
+            pros::delay(500); //TODO: ma
+        }
+
+        if(bottomRoller.get_actual_velocity() < 10) { //if vel low, do the thing
+            prevIntakeState = intakeState; //record current intake state
+            intakeState = 2; //outtake for 100ms
+            pros::delay(100);
+            intakeState = prevIntakeState; //return to old state
+        }
+
+        prevIntakeState = intakeState; //update intake state
 
         pros::delay(10);
     }

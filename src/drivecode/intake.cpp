@@ -1,6 +1,8 @@
 #include <iostream>
 #include "drivecode/intake.hpp"
 #include "drivecode/pistons.hpp"
+#include "drivecode/sensors.hpp"
+#include "autonomous/autonSelector.hpp"
 #include <iostream>
 
 int intakeState = 0;
@@ -12,6 +14,8 @@ bool onePressed = false;
 bool twoPressed = false;
 bool threePressed = false;
 bool fourPressed = false;
+bool distPressed = false;
+
 
 int velState = 0;
 
@@ -47,6 +51,10 @@ void runIntake() {
                 topRoller.move_voltage(velValue);
                 break;
             }
+            case 5: {
+                bottomRoller.move_voltage(0);
+                topRoller.move_voltage(-velValue);
+            }
 
             // case 4: { //load intake (only bottom rollers)
             //     bottomRoller.move_voltage(velValue);
@@ -61,27 +69,47 @@ void runIntake() {
     }
 }
 
-
 void updateIntake() {
+    if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+        autonColor = ' ';
+    }
+
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //a, stop all intake, state 0
         intakeState = 0;
     }
+
+    // if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) { //l1, long goal (indexer outtake), state 1
+    //     if(!distPressed) {
+    //         distPressed = true;
+
+    //         if (distActive) {
+    //             distActive = false;
+    //             topFilled = false;
+    //         } else {
+    //             distActive = true;
+    //         }
+            
+    //     } 
+    // } else {
+    //     distPressed = false;
+    // }
+
     
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //l1, long goal (indexer outtake), state 1
         if(!onePressed) {
             onePressed = true;
+
             if (intakeState == 1) {
                 intakeState = 0;
             } else {
+                velValue = 12000;
                 intakeState = 1;
             }
+
+            
         } 
     } else {
         onePressed = false;
-    }
-
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
-        intakeState = 0;
     }
     
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //l2, mid goal (indexer outtake), state 2
@@ -90,6 +118,7 @@ void updateIntake() {
             if (intakeState == 2) {
                 intakeState = 0;
             } else {
+                velValue = 12000;
                 intakeState = 2;
             }
         }
@@ -103,6 +132,7 @@ void updateIntake() {
             if (intakeState == 3) {
                 intakeState = 0;
             } else {
+                velValue = 12000 * 0.6;
                 intakeState = 3;
             }
         }

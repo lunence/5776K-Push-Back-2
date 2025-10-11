@@ -7,6 +7,5 @@
 
 void longGoalRight();
 void longGoalLeft();
-void redSWP();
 void skills();
 

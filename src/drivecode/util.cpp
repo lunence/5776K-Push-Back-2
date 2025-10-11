@@ -7,8 +7,8 @@
 
 //motor brake modes
 void motorInit() {
-    bottomRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    topRoller.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    bottomRoller.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    topRoller.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
     chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 }
 
@@ -20,13 +20,14 @@ void sensorInit() {
 //begin all tasks
 void taskInit() {
     pros::Task intakeTask(runIntake, "intake task");
-    pros::Task consoleTask(runConsole, "console task");
+    //pros::Task consoleTask(runConsole, "console task");
     pros::Task pistonTask(runPistons, "piston task");
     pros::Task colorTask(colorSortRumble, "color task");
     pros::Task distanceTask(distIntakeStop, "distance task");
     pros::Task screenTask(runScreen, "screen task");
     pros::Task controllerTask(runController, "controller task");
     pros::Task autonFunctTask(autonOneBlock, "auton task");
+    //pros::Task antiJamTask(antiJam, "antijam task");
 
 }
 

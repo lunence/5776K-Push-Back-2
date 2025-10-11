@@ -27,6 +27,7 @@ void initialize() {
 	chassis.setPose(0, 0, 0);
 
 	//autonSelector();
+	//autonColor = 'B';
 
 	taskInit();
 	motorInit();
@@ -38,18 +39,29 @@ void disabled() {
 }
 
 void competition_initialize() {
-	
+	// pros::lcd::initialize();
+
+	// chassis.calibrate();
+	// chassis.setPose(0, 0, 0);
+
+	// //autonSelector();
+
+	// taskInit();
+	// motorInit();
+	// sensorInit();
 }
 
 void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
 	chassis.setPose(0, 0, 0); //why are we doing twice it's in initialize - zach
+	autonColor = 'B';
 
-	//longGoalLeft();
-	longGoalRight();
-	// chooseAuton();
+	longGoalLeft();
+	//longGoalRight();
+	//skills();
+	//chooseAuton();
 	// chassis.turnToHeading(90, 1000);
-	// chassis.moveToPoint(0, 44, 2000);
+	//chassis.moveToPoint(0, 24, 2000);
 	// pros::delay(1000);
 	// chassis.moveToPoint(0,0,2000,{.forwards = false});
 }
