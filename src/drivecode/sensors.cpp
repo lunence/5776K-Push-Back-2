@@ -40,28 +40,46 @@ void colorSortRumble() {
 }
 
 void distIntakeStop() {
-    bool blockDetected = false;
-    while(true) {
-        if(trapdoorState == 1){
-            if(distance.get_distance() > 0 && distance.get_distance() < 76) {
-                std::cout<<"dist threshold reached"<<"\n";
-                if(!blockDetected) {
-                    std::cout<<"added block"<<"\n";
-                    blockDetected = true;
-                    blockCount++;
-                    if (blockCount >= target) {
-                        intakeState = 3;     
-                        std::cout<<"intake stop"<<"\n";
-                    }
-                }
-            } else {
-                blockDetected = false;
-            }
+    // bool blockDetected = false;
 
-        } else {  
-            blockCount = 0;
-            blockDetected = false;                          
+    int count = 0;
+
+    while(true) {
+
+        if(trapdoorState == 0 && intakeState == 1) {
+            if(distance.get_distance() > 0 && distance.get_distance() < 51) {
+                count++;
+
+                if(count = 200) {
+                    intakeState = 3;
+                    count = 0;
+                }
+
+            }
+        } else {
+            count = 0;
         }
+
+        // if(trapdoorState == 1){
+        //     if(distance.get_distance() > 0 && distance.get_distance() < 76) {
+        //         std::cout<<"dist threshold reached"<<"\n";
+        //         if(!blockDetected) {
+        //             std::cout<<"added block"<<"\n";
+        //             blockDetected = true;
+        //             blockCount++;
+        //             if (blockCount >= target) {
+        //                 intakeState = 3;     
+        //                 std::cout<<"intake stop"<<"\n";
+        //             }
+        //         }
+        //     } else {
+        //         blockDetected = false;
+        //     }
+
+        // } else {  
+        //     blockCount = 0;
+        //     blockDetected = false;                          
+        // }
 
         pros::delay(10);
     }

@@ -58,9 +58,7 @@ void opcontrol() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_COAST);
 	velValue = 12000;
 	intakeState = 0;
-	autonColor = 1;
 
-	
 	while (true) {
 
 		//subsystems
