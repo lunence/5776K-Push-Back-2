@@ -252,17 +252,16 @@ void sawpMid() {
     chassis.moveToPoint(0,28.5, 1000);
     chassis.turnToHeading(88, 750);
     chassis.moveToPoint(6, 30, 1000, {.minSpeed = 50});
-    pros::delay(500);
+    pros::delay(400);
 
     //go back and score long goal
     chassis.moveToPoint(-6, 29.5, 500, {.forwards = false, .maxSpeed = 100});
-    intakeState = 0;
+    intakeState = 1;
     littleWillState = 0;
     hoodState = 1;
-    trapdoorState = 1;
-    chassis.turnToHeading(-81, 1000, {.maxSpeed = 90});
+    chassis.turnToHeading(-81, 1000);
     chassis.moveToPoint(-16, 31, 1000, {.minSpeed = 50});
-    intakeState = 1;
+    trapdoorState = 1;
     pros::delay(750); //all blocks 1500
     intakeState = 0;
     trapdoorState = 0;
@@ -277,7 +276,7 @@ void sawpMid() {
     pros::delay(100);
 
     // get second clump of blocks
-    chassis.turnToHeading(180, 1000);
+    chassis.turnToHeading(180, 500);
     chassis.moveToPoint(-27, -18, 1000, {.minSpeed = 80});
     chassis.moveToPoint(-27, -36, 500, {.maxSpeed = 40});
     pros::delay(100); 
@@ -287,7 +286,7 @@ void sawpMid() {
     chassis.moveToPoint(-34.8, -30.52, 1000);
     trapdoorState = 1;
     intakeState = 1;
-    pros::delay(100); //750 for 3 blocks
+    pros::delay(250); //750 for 3 blocks
     intakeState = 0;
     trapdoorState = 0;
 
