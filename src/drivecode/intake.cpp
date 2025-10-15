@@ -71,7 +71,9 @@ void runIntake() {
 
 void updateIntake() {
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
-        autonColor = ' ';
+        hoodState = 1;
+        littleWillState = 0;
+        //autonColor = ' ';
     }
 
     if(controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) { //a, stop all intake, state 0

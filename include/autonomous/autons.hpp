@@ -8,4 +8,5 @@
 void longGoalRight();
 void longGoalLeft();
 void skills();
-
+void sawpLow();
+void sawpMid();

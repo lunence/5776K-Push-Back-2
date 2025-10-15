@@ -5,7 +5,7 @@ pros::Motor bottomRoller(20, pros::MotorGearset::blue);
 pros::Motor topRoller(12, pros::MotorGearset::blue);
 
 pros::MotorGroup leftMotors({-15, -13, -14}, pros::MotorGearset::blue);
-pros::MotorGroup rightMotors({19, 18, 17}, pros::MotorGearset::blue);
+pros::MotorGroup rightMotors({19, 3, 17}, pros::MotorGearset::blue);
 
 //piston definitions
 pros::ADIDigitalOut littleWill ('B'); 
@@ -16,8 +16,8 @@ pros::ADIDigitalOut hood('A');
 
 
 //sensor definitions
-pros::Optical colorLeft(10); //TODO: THIS IS THE ONE THAT'S WIRED
-pros::Optical colorRight(3); //TODO: fix port
+pros::Optical colorLeft(0); //TODO: THIS IS THE ONE THAT'S WIRED // was 10
+pros::Optical colorRight(0); //TODO: fix port //3
 pros::Distance distance(1);
 pros::Imu imu(16);
 pros::Rotation horizRotation(4);

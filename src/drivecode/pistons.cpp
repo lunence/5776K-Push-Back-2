@@ -21,6 +21,7 @@ void updatePistons() {
                 littleWillState = 1;
             } else if(littleWillState == 1){
                 littleWillState = 0;
+                hoodState = 1;
             }
         } 
     } else {
@@ -79,6 +80,8 @@ void runPistons() {
             //velValue = 12000;
         } else if(littleWillState == 1) {
             littleWill.set_value(true);
+            hoodState = 0;
+            trapdoorState = 0;
             //velValue = 12000 * 0.6;
         } 
         

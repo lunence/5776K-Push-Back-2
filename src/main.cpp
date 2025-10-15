@@ -54,13 +54,14 @@ void competition_initialize() {
 void autonomous() {
 	chassis.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
 	chassis.setPose(0, 0, 0); //why are we doing twice it's in initialize - zach
-	autonColor = 'B';
+	//autonColor = 'B';
 
-	longGoalLeft();
+	sawp();
+	//longGoalLeft();
 	//longGoalRight();
 	//skills();
 	//chooseAuton();
-	// chassis.turnToHeading(90, 1000);
+	//chassis.turnToHeading(90, 1000);
 	//chassis.moveToPoint(0, 24, 2000);
 	// pros::delay(1000);
 	// chassis.moveToPoint(0,0,2000,{.forwards = false});
