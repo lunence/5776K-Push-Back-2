@@ -56,7 +56,8 @@ void autonomous() {
 	chassis.setPose(0, 0, 0); //why are we doing twice it's in initialize - zach
 	//autonColor = 'B';
 
-	sawpLow();
+	skills();
+	//sawp();
 	// longGoalLeft();
 	//longGoalRight();
 	//skills();

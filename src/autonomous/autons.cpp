@@ -187,62 +187,127 @@ void longGoalRight() {
 
 
 void skills() {
-    //go to 3 blocks
-    chassis.turnToHeading(17, 1000);
+    //go to match loader
+    littleWillState = 1;
     intakeState = 3;
-    chassis.moveToPoint(7.5, 25.4,1500, {.maxSpeed = 40});
-    pros::delay(250);
-    //intakeState = 0;
+    chassis.moveToPoint(0,27.5, 1000);
+    chassis.turnToHeading(91, 1000);
+    chassis.moveToPoint(4, 27.5, 1000, {.minSpeed = 50});
+    chassis.moveToPoint(6, 27.5, 250);
+    pros::delay(1750); //750 perfect
 
-    //go to mid low goal
-    chassis.turnToHeading(-42.9, 1000);
-    chassis.moveToPoint(-1.77, 34, 1500, {.maxSpeed=80});
-    chassis.waitUntilDone();
+    //go back and score long goal
+    chassis.moveToPoint(-4, 30, 500, {.forwards = false, .maxSpeed = 90});
+    intakeState = 0;
+    littleWillState = 0;
+    hoodState = 1;
+    trapdoorState = 1;
+    chassis.turnToHeading(-83, 750, {.maxSpeed = 90});
+    chassis.moveToPoint(-16, 30, 1000, {.minSpeed = 50});
+    intakeState = 1;
+    pros::delay(2000);
+
+    //go to low
+    chassis.moveToPoint(-1.97, 31.6, 500, {.forwards = false});
+    chassis.turnToHeading(-130, 500);
+    intakeState = 3;
+    chassis.moveToPoint(-27.5, 4.7, 1000, {.maxSpeed = 40});
+    chassis.moveToPoint(-36, -2.1, 1000);
+    pros::delay(1000);
     velValue = 12000*0.8;
     intakeState = 2;
-    pros::delay(2000);
     velValue = 12000;
+    pros::delay(1500);
 
-
-    // driving reverse to the matchload
-    chassis.moveToPoint(32.5, 1.3, 2000, {.forwards=false});
-    chassis.waitUntilDone();
-    littleWillState = 1;
-    chassis.turnToHeading(-182, 1000);
-    chassis.waitUntilDone();
+    //other blocks
+    chassis.moveToPoint(-25.3, 10.1, 500, {.forwards = false});
     intakeState = 3;
-    
-    // driving into the matchloader
-    chassis.moveToPoint(31.5, -12, 1250);
-    pros::delay(2000); // wait to intake
-
-    
-    // //back up from match loader
-    chassis.moveToPoint(31.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
-    chassis.waitUntilDone();
-    pros::delay(100);
-    hoodState = 1;
-    littleWillState = 0;
-
-    
-    //turn to long goal and score
-    trapdoorState = 1;
+    hoodState = 0;
+    chassis.turnToHeading(180, 500);
+    chassis.moveToPoint(-28, -18, 1000, {.minSpeed = 70});
+    chassis.moveToPoint(-28, -40, 2000, {.maxSpeed = 25}); 
     pros::delay(500);
-    chassis.turnToHeading(4, 1000);
-    chassis.waitUntilDone();
-    chassis.moveToPoint(32.5, 16.51, 1000, {.maxSpeed = 40});
-    chassis.turnToHeading(-4, 1000);
-    chassis.waitUntilDone();
+
+    //score mid
+    chassis.turnToHeading(-45, 1000);
+    intakeState = 1;
+    chassis.moveToPoint(-36, -32, 1000);
+    trapdoorState = 1;
+    pros::delay(1000);
+
+    //other match loader
+    chassis.moveToPoint(2.8, -64.2, 2000, {.forwards = false});
+    trapdoorState = 0;
+    intakeState = 3;
+    littleWillState = 1;
+    chassis.turnToHeading(90, 1000);
+    chassis.moveToPoint(7, -63.5, 1000, {.minSpeed = 50});
+    pros::delay(1750);
+
+    //long goal
+    chassis.moveToPoint(-2.17, -63.2, 1000, {.forwards = false});
+    intakeState = 0;
+    littleWillState = 0;
     hoodState = 1;
+    trapdoorState = 1;
+    chassis.turnToHeading(-90, 1000);
+    chassis.moveToPoint(-13.7, -64, 1000);
+    intakeState = 1;
+    pros::delay(2000);
+
+    //park
+    chassis.moveToPoint(-2.17, -64, 1000, {.forwards = false});
+    chassis.turnToHeading(263.5, 1000);
+    chassis.moveToPose(15.6, -37.1, 180, 1000, {.forwards = false});
+
+}
+
+void sawp() {
+    //go to match loader
+    littleWillState = 1;
+    intakeState = 3;
+    chassis.moveToPoint(0,27.5, 1000);
+    chassis.turnToHeading(91, 1000);
+    chassis.moveToPoint(4, 27.5, 1000, {.minSpeed = 50});
+    chassis.moveToPoint(6, 27.5, 250);
+    pros::delay(500); //750 perfect
+
+    //go back and score long goal
+    chassis.moveToPoint(-4, 30, 500, {.forwards = false, .maxSpeed = 90});
+    intakeState = 0;
+    littleWillState = 0;
+    hoodState = 1;
+    trapdoorState = 1;
+    chassis.turnToHeading(-83, 750, {.maxSpeed = 90});
+    chassis.moveToPoint(-16, 30, 1000, {.minSpeed = 50});
     intakeState = 1;
     pros::delay(1500);
 
-    //go to park zone
-    chassis.moveToPoint(32, 0.4, 1000, {.forwards = false});
-    chassis.turnToHeading(-140, 1000);
-    chassis.moveToPose(0, -14, -90, 1000, {.lead = 0.5, .maxSpeed = 90});
+    //go to low
+    chassis.moveToPoint(-1.97, 31.6, 500, {.forwards = false});
+    chassis.turnToHeading(-130, 500);
+    intakeState = 3;
+    chassis.moveToPoint(-29.6, 2.9, 1000, {.maxSpeed = 40});
+    chassis.moveToPoint(-35.5, -1.6, 1000);
+    pros::delay(250);
+    velValue = 12000*0.8;
     intakeState = 2;
-    chassis.moveToPoint(-24, -14, 10000, {.minSpeed = 127});
+    velValue = 12000;
+    pros::delay(1000);
+
+    //other blocks
+    chassis.moveToPoint(-25.3, 10.1, 500, {.forwards = false});
+    intakeState = 3;
+    hoodState = 0;
+    chassis.turnToHeading(180, 500);
+    chassis.moveToPoint(-28, -18, 1000, {.minSpeed = 80});
+    chassis.moveToPoint(-28, -38.4, 500, {.maxSpeed = 40}); 
+
+    //score mid
+    chassis.turnToHeading(-45, 1000);
+    intakeState = 1;
+    chassis.moveToPoint(-36, -32, 1000);
+    trapdoorState = 1;
 
 }
 
@@ -250,19 +315,19 @@ void sawpLow() {
     //go to match loader
     littleWillState = 1;
     intakeState = 3;
-    chassis.moveToPoint(0,29, 1000);
-    chassis.turnToHeading(88, 750);
-    chassis.moveToPoint(4, 29.5, 1000, {.minSpeed = 50});
+    chassis.moveToPoint(0,28.5, 1000);
+    chassis.turnToHeading(89, 750);
+    chassis.moveToPoint(4, 28.5, 1000, {.minSpeed = 50});
     pros::delay(750);
 
     //go back and score long goal
-    chassis.moveToPoint(-6, 30.5, 500, {.forwards = false, .maxSpeed = 100});
+    chassis.moveToPoint(-6, 29.5, 500, {.forwards = false, .maxSpeed = 100});
     intakeState = 0;
     littleWillState = 0;
     hoodState = 1;
     trapdoorState = 1;
-    chassis.turnToHeading(-83, 1000, {.maxSpeed = 90});
-    chassis.moveToPoint(-16, 32, 1000, {.minSpeed = 50});
+    chassis.turnToHeading(-83, 750, {.maxSpeed = 90});
+    chassis.moveToPoint(-16, 29.5, 1000, {.minSpeed = 50});
     intakeState = 1;
     pros::delay(1500);
 
@@ -306,8 +371,8 @@ void sawpMid() {
     chassis.moveToPoint(-6, 29.5, 500, {.forwards = false, .maxSpeed = 100});
     intakeState = 1;
     littleWillState = 0;
-    hoodState = 1;
     chassis.turnToHeading(-81, 1000);
+    hoodState = 1;
     chassis.moveToPoint(-16, 31, 1000, {.minSpeed = 50});
     trapdoorState = 1;
     pros::delay(750); //all blocks 1500
