@@ -17,7 +17,7 @@ void longGoalLeft() {
    trapdoorState = 1; 
     //pros::delay(100);
    intakeState = 1;
-   pros::delay(650); // 1500 all balls //450 auton one ball 
+   pros::delay(450); // 1500 all balls //450 auton one ball 
    intakeState = 5;
    pros::delay(250);
    intakeState = 0;
@@ -35,12 +35,12 @@ void longGoalLeft() {
    intakeState = 3;
    
    // driving into the matchloader
-   chassis.moveToPoint(-32, -14, 1500, {.maxSpeed = 100});
+   chassis.moveToPoint(-32, -10, 1500, {.maxSpeed = 100}); //TODO: og y -14 (zach)
    //chassis.moveToPoint(-32, -8, 500, {.forwards = false});
-   pros::delay(300); // wait to intake
+   pros::delay(400); // wait to intake //TODO: might have to tune if we only want 3
 
    
-   // //back up from match loader
+   //back up from match loader
    chassis.moveToPoint(-32, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
    chassis.waitUntilDone();
    hoodState = 1;
@@ -52,23 +52,23 @@ void longGoalLeft() {
    pros::delay(500);
    chassis.turnToHeading(-4, 1000);
    chassis.waitUntilDone();
-   chassis.moveToPoint(-33, 17, 1000, {.maxSpeed = 40});
+   chassis.moveToPoint(-33, 21, 1500, {.maxSpeed = 60}); //og 17 (zach)
    chassis.waitUntilDone();
    chassis.turnToHeading(3, 500);
    hoodState = 1;
    intakeState = 1;
 
-   while(true) {
-    if(autonColor == 'R') {
-        if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
-            intakeState = 0;
-        }
-    } else if(autonColor == 'B') {
-        if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
-            intakeState = 0;
-        }
-    }
-   }
+//    while(true) { //TODO: what is this - zach
+//     if(autonColor == 'R') {
+//         if(200 < colorLeft.get_hue() && colorLeft.get_hue() < 240 || 200 < colorRight.get_hue() && colorRight.get_hue() < 240) {
+//             intakeState = 0;
+//         }
+//     } else if(autonColor == 'B') {
+//         if(0 < colorLeft.get_hue() && colorLeft.get_hue() < 25 || 0 < colorRight.get_hue() && colorRight.get_hue() < 25) {
+//             intakeState = 0;
+//         }
+//     }
+//    }
 
 }
 
@@ -77,7 +77,7 @@ void longGoalRight() {
    //go to 3 blocks
    chassis.turnToHeading(17, 1000);
    intakeState = 3;
-   chassis.moveToPoint(7.5, 25.4,1500, {.maxSpeed = 40});
+   chassis.moveToPoint(7.5, 25.4, 1500, {.maxSpeed = 40});
    pros::delay(250);
    //intakeState = 0;
 
@@ -90,22 +90,64 @@ void longGoalRight() {
    intakeState = 3;
    pros::delay(250);
 
-
    // driving reverse to the matchload
-   chassis.moveToPoint(33, 1.8, 2000, {.forwards=false});
+   chassis.moveToPoint(30.5, 4.9, 1250, {.forwards=false});
    chassis.waitUntilDone();
+   //trapdoorState = 0; //only for 4 on mid
    littleWillState = 1;
-   chassis.turnToHeading(-182, 1000);
+   chassis.turnToHeading(180, 1400);
    chassis.waitUntilDone();
    intakeState = 3;
    
    // driving into the matchloader
-   chassis.moveToPoint(32.5, -12, 1250);
+   chassis.moveToPoint(30.5, -10, 1500, {.maxSpeed = 100});
+   chassis.waitUntilDone();
+   pros::delay(400);
+
+//    leftMotors.move_voltage(5500);
+//    rightMotors.move_voltage(5500);
+//    pros::delay(600); // wait to intake //TODO: might have to tune if we only want 3
+// //    leftMotors.move_voltage(-1000);
+// //    rightMotors.move_voltage(-1000);
+// //    pros::delay(100);
+//    leftMotors.move_voltage(1000);
+//    rightMotors.move_voltage(1000);
+//    pros::delay(1500);
+
+   //back up from match loader
+   chassis.moveToPoint(30.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
+   chassis.waitUntilDone();
+   hoodState = 1;
+   littleWillState = 0;
+   
+   //turn to long goal and score
+   trapdoorState = 1;
+   pros::delay(500);
+   chassis.turnToHeading(0, 1000);
+   chassis.waitUntilDone();
+   chassis.moveToPoint(30.5, 21, 1500, {.maxSpeed = 60}); //og 17 (zach)
+   chassis.waitUntilDone();
+   chassis.turnToHeading(0, 500);
+   intakeState = 2;
+   pros::delay(100);
+   hoodState = 1;
+   intakeState = 1;   
+
+   /* //TODO: thingy ad;jf
+   // driving reverse to the matchload
+   chassis.moveToPoint(30.5, 2, 2000, {.forwards=false});
+   chassis.waitUntilDone();
+   littleWillState = 1;
+   chassis.turnToHeading(-180, 1300);
+   chassis.waitUntilDone();
+   intakeState = 3;
+   
+   // driving into the matchloader
+   chassis.moveToPoint(30.5, -10, 1250, {.maxSpeed = 100}); //TODO: og x 32.5
    //pros::delay(250); // wait to intake
 
-   
-   // //back up from match loader
-   chassis.moveToPoint(32.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
+   //back up from match loader
+   chassis.moveToPoint(30.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
    chassis.waitUntilDone();
    pros::delay(100);
    hoodState = 1;
@@ -117,7 +159,7 @@ void longGoalRight() {
    pros::delay(500);
    chassis.turnToHeading(4, 1000);
    chassis.waitUntilDone();
-   chassis.moveToPoint(33.5, 16.51, 1000, {.maxSpeed = 40});
+   chassis.moveToPoint(31, 16.51, 1000, {.maxSpeed = 40});
    chassis.turnToHeading(-4, 1000);
    chassis.waitUntilDone();
    hoodState = 1;
@@ -134,6 +176,7 @@ void longGoalRight() {
         }
     }
    }
+    */
 
 }
 

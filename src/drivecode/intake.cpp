@@ -134,7 +134,7 @@ void updateIntake() {
             if (intakeState == 3) {
                 intakeState = 0;
             } else {
-                velValue = 12000 * 0.6;
+                velValue = 12000 * 0.85;
                 intakeState = 3;
             }
         }
@@ -160,7 +160,7 @@ void updateIntake() {
         if(!velButtonPressed) {
             velButtonPressed = true;
             if(velState == 0) {
-                velValue = 12000 * 0.6;
+                velValue = 12000 * 0.85;
                 velState = 1;
             } else if(velState == 1) {
                 velValue = 12000;

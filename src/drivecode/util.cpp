@@ -77,7 +77,7 @@ void runController() {
     while (true) {
         if(velValue == 12000)
             controller.set_text(0, 0, "100%");
-        else if(velValue == 12000 * 0.6)
-            controller.set_text(0, 0, "60%");
+        else if(velValue == 12000 * 0.85)
+            controller.set_text(0, 0, "85%");
     }
 }
