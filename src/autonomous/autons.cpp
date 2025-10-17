@@ -95,14 +95,14 @@ void longGoalRight() {
    chassis.waitUntilDone();
    //trapdoorState = 0; //only for 4 on mid
    littleWillState = 1;
-   chassis.turnToHeading(180, 1400);
+   chassis.turnToHeading(180, 1100);
    chassis.waitUntilDone();
    intakeState = 3;
    
    // driving into the matchloader
    chassis.moveToPoint(30.5, -10, 1500, {.maxSpeed = 100});
    chassis.waitUntilDone();
-   pros::delay(400);
+   pros::delay(700);
 
 //    leftMotors.move_voltage(5500);
 //    rightMotors.move_voltage(5500);
@@ -125,13 +125,18 @@ void longGoalRight() {
    pros::delay(500);
    chassis.turnToHeading(0, 1000);
    chassis.waitUntilDone();
-   chassis.moveToPoint(30.5, 21, 1500, {.maxSpeed = 60}); //og 17 (zach)
+   chassis.moveToPoint(31, 16, 1500, {.maxSpeed = 60}); //og 17 (zach)
    chassis.waitUntilDone();
-   chassis.turnToHeading(0, 500);
+   //chassis.turnToHeading(0, 500);
    intakeState = 2;
    pros::delay(100);
    hoodState = 1;
    intakeState = 1;   
+
+
+//STOPPED HERE
+
+
 
    /* //TODO: thingy ad;jf
    // driving reverse to the matchload
