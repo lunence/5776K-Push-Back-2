@@ -35,7 +35,7 @@ void longGoalLeft() {
    intakeState = 3;
    
    // driving into the matchloader
-   chassis.moveToPoint(-32, -10, 1500, {.maxSpeed = 100}); //TODO: og y -14 (zach)
+   chassis.moveToPoint(-32.5, -10, 1500, {.maxSpeed = 100}); //TODO: og y -14 (zach)
    //chassis.moveToPoint(-32, -8, 500, {.forwards = false});
    pros::delay(400); // wait to intake //TODO: might have to tune if we only want 3
 
@@ -86,23 +86,22 @@ void longGoalRight() {
    chassis.moveToPoint(-1.27, 33.95, 1500, {.maxSpeed=80});
    chassis.waitUntilDone();
    intakeState = 2;
-   pros::delay(850);
+   pros::delay(1500);
    intakeState = 3;
    pros::delay(250);
 
    // driving reverse to the matchload
    chassis.moveToPoint(31.5, 4.9, 1250, {.forwards=false});
    chassis.waitUntilDone();
-   //trapdoorState = 0; //only for 4 on mid
+   trapdoorState = 0; //only for 4 on mid
    littleWillState = 1;
    chassis.turnToHeading(180, 1100);
    chassis.waitUntilDone();
    intakeState = 3;
    
-   // driving into the matchloader
-   chassis.moveToPoint(31.5, -10, 1500, {.maxSpeed = 100});
-   chassis.waitUntilDone();
-   pros::delay(700);
+   // driving into the matchloader vfggg
+   chassis.moveToPoint(31.5, -10, 1000, {.maxSpeed = 100});
+   pros::delay(500);
 
    //back up from match loader
    chassis.moveToPoint(31.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
@@ -115,15 +114,12 @@ void longGoalRight() {
    pros::delay(500);
    chassis.turnToHeading(0, 1000);
    chassis.waitUntilDone();
-   chassis.moveToPoint(31.5, 16, 1500, {.maxSpeed = 60}); //og 17 (zach)
+   chassis.moveToPoint(32.7, 14.41, 1500, {.maxSpeed = 60}); //og 17 (zach)
    chassis.waitUntilDone();
-   //chassis.turnToHeading(0, 500);
    intakeState = 2;
    pros::delay(100);
    hoodState = 1;
-   intakeState = 1;   
-
-
+   intakeState = 1;
 //STOPPED HERE
 
 
@@ -253,8 +249,8 @@ void skills() {
     intakeState = 0;
     chassis.moveToPose(-4.1, -14.95, -90, 5000, {.forwards = false, .lead = 0.8});
     pros::delay(500);
-    chassis.moveToPoint(8.03, -16, 2000, {.forwards = false, .minSpeed = 127});
-    chassis.moveToPoint(8.03, -16, 2000, {.forwards = false, .minSpeed = 127});
+    chassis.moveToPoint(20, -16, 2000, {.forwards = false, .minSpeed = 127});
+    chassis.moveToPoint(20, -16, 2000, {.forwards = false, .minSpeed = 127});
     
 
 }
@@ -265,8 +261,8 @@ void sawp() {
     intakeState = 3;
     chassis.moveToPoint(0,27.5, 1000);
     chassis.turnToHeading(91, 1000);
-    chassis.moveToPoint(4, 27.5, 1000, {.minSpeed = 50});
-    chassis.moveToPoint(6, 27.5, 250);
+    chassis.moveToPoint(2.75, 25, 1000, {.minSpeed = 40}); 
+    chassis.moveToPoint(6, 27.5, 250, {.minSpeed = 80});
     pros::delay(500); //750 perfect
 
     //go back and score long goal
@@ -286,7 +282,7 @@ void sawp() {
     intakeState = 3;
     chassis.moveToPoint(-29.6, 2.9, 1000, {.maxSpeed = 40});
     chassis.moveToPoint(-35.5, -1.6, 1000);
-    pros::delay(250);
+    pros::delay(100);
     velValue = 12000*0.8;
     intakeState = 2;
     velValue = 12000;

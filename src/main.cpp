@@ -26,7 +26,7 @@ void initialize() {
 	chassis.calibrate();
 	chassis.setPose(0, 0, 0);
 
-	autonSelector();
+	// autonSelector();
 	//autonColor = 'B';
 
 	taskInit();
@@ -59,9 +59,9 @@ void autonomous() {
 	//skills();
 	//sawp();
 	// longGoalLeft();
-	//longGoalRight();
-	//skills();
-	chooseAuton();
+	longGoalRight();
+	// skills();
+	// longGoalLeft();
 	//chassis.turnToHeading(90, 1000);
 	//chassis.moveToPoint(0, 24, 2000);
 	// pros::delay(1000);
