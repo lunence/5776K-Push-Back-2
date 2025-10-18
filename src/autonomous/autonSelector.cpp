@@ -52,7 +52,8 @@ void autonSelector() {
     pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
     pros::screen::fill_rect(10, 130, 250, 170); //20 pixels below prev button
     pros::screen::set_pen(pros::c::COLOR_WHITE);
-    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Nothing");
+    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "SAWP");
+
 
     pros::delay(500);
     optionSelected = false;
@@ -128,7 +129,7 @@ void autonSelector() {
             pros::screen::set_pen(pros::c::COLOR_GREEN);
             pros::screen::fill_rect(10, 130, 250, 170);
             pros::screen::set_pen(pros::c::COLOR_WHITE);
-            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "Nothing Selected!");
+            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "SAWP Selected!");
             pros::delay(500);
             pros::screen::erase();
         }
@@ -149,7 +150,7 @@ void chooseAuton() {
 				break;
 			}
 			case 3: {
-				std::cout<<"red auton 3\n";
+				sawp();
 				break;
 			}
 		}
@@ -164,7 +165,7 @@ void chooseAuton() {
 				break;
 			}
 			case 3: {
-				std::cout<<"blue auton 3\n";
+				sawp();
 				break;
 			}
 		}
