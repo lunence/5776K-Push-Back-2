@@ -54,6 +54,12 @@ void autonSelector() {
     pros::screen::set_pen(pros::c::COLOR_WHITE);
     pros::screen::print(pros::E_TEXT_MEDIUM, 20, 140, "SAWP");
 
+    //button 4 printing
+    pros::screen::set_pen(pros::c::COLOR_FOREST_GREEN);
+    pros::screen::fill_rect(10, 190, 250, 230); //20 pixels below prev button
+    pros::screen::set_pen(pros::c::COLOR_WHITE);
+    pros::screen::print(pros::E_TEXT_MEDIUM, 20, 200, "Skills");
+
 
     pros::delay(500);
     optionSelected = false;
@@ -133,14 +139,25 @@ void autonSelector() {
             pros::delay(500);
             pros::screen::erase();
         }
+
+        //button 4
+        if(status.x >= 10 && status.x <= 250 && status.y >= 190 && status.y <= 230) {
+            optionSelected = true;
+            auton = 4;
+            pros::screen::set_pen(pros::c::COLOR_GREEN);
+            pros::screen::fill_rect(10, 190, 250, 230);
+            pros::screen::set_pen(pros::c::COLOR_WHITE);
+            pros::screen::print(pros::E_TEXT_MEDIUM, 20, 200, "Skills Selected!");
+            pros::delay(500);
+            pros::screen::erase();
+        }
     }
 
     pros::screen::print(pros::E_TEXT_MEDIUM, 0, "Color: %c      Auton: %d", autonColor, auton);
 }
 
 void chooseAuton() {
-    if(autonColor == 'R') {
-		switch(auton) {
+    switch(auton) {
 			case 1: {
 				longGoalLeft();
 				break;
@@ -153,27 +170,46 @@ void chooseAuton() {
 				sawp();
 				break;
 			}
-		}
-	} else if(autonColor == 'B') {
-		switch(auton) {
-			case 1: {
-				longGoalLeft();
-				break;
-			}
-			case 2: {
-				longGoalRight();
-				break;
-			}
-			case 3: {
-				sawp();
-				break;
-			}
-		}
-	} else {
-		std::cout<<"testing\n";
-		//intakeState = 1;
-		//outtakeUntilCorrect('R', 100000);
-		//longGoalRight();
-		//skills();
-	}
+            case 4: {
+                skills();
+                break;
+            }
+        }
+    // if(autonColor == 'R') {
+	// 	switch(auton) {
+	// 		case 1: {
+	// 			longGoalLeft();
+	// 			break;
+	// 		}
+	// 		case 2: {
+	// 			longGoalRight();
+	// 			break;
+	// 		}
+	// 		case 3: {
+	// 			sawp();
+	// 			break;
+	// 		}
+	// 	}
+	// } else if(autonColor == 'B') {
+	// 	switch(auton) {
+	// 		case 1: {
+	// 			longGoalLeft();
+	// 			break;
+	// 		}
+	// 		case 2: {
+	// 			longGoalRight();
+	// 			break;
+	// 		}
+	// 		case 3: {
+	// 			sawp();
+	// 			break;
+	// 		}
+	// 	}
+	// } else {
+	// 	std::cout<<"testing\n";
+	// 	//intakeState = 1;
+	// 	//outtakeUntilCorrect('R', 100000);
+	// 	//longGoalRight();
+	// 	//skills();
+	// }
 }

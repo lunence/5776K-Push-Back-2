@@ -13,7 +13,8 @@ void longGoalLeft() {
 
    //go to mid goal
    chassis.turnToHeading(42, 1000);
-   chassis.moveToPoint(1.27, 33.95, 1500);
+   chassis.moveToPoint(1, 33.95, 1500);
+   chassis.turnToHeading(42, 1000);
    trapdoorState = 1; 
     //pros::delay(100);
    intakeState = 1;
@@ -26,7 +27,7 @@ void longGoalLeft() {
 
 
    // driving reverse to the matchload
-   chassis.moveToPoint(-33, 1.8, 1250, {.forwards=false});
+   chassis.moveToPoint(-32, 1.8, 1250, {.forwards=false});
    chassis.waitUntilDone();
    //trapdoorState = 0; //only for 4 on mid
    littleWillState = 1;
@@ -35,13 +36,13 @@ void longGoalLeft() {
    intakeState = 3;
    
    // driving into the matchloader
-   chassis.moveToPoint(-32, -10, 1500, {.maxSpeed = 100}); //TODO: og y -14 (zach)
+   chassis.moveToPoint(-31, -11, 1500, {.maxSpeed = 100}); //TODO: og y -14 (zach)
    //chassis.moveToPoint(-32, -8, 500, {.forwards = false});
    pros::delay(400); // wait to intake //TODO: might have to tune if we only want 3
 
    
    //back up from match loader
-   chassis.moveToPoint(-32, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
+   chassis.moveToPoint(-31, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
    chassis.waitUntilDone();
    hoodState = 1;
    littleWillState = 0;
@@ -52,7 +53,7 @@ void longGoalLeft() {
    pros::delay(500);
    chassis.turnToHeading(-4, 1000);
    chassis.waitUntilDone();
-   chassis.moveToPoint(-33, 21, 1500, {.maxSpeed = 60}); //og 17 (zach)
+   chassis.moveToPoint(-32, 21, 1500, {.maxSpeed = 60}); //og 17 (zach)
    chassis.waitUntilDone();
    chassis.turnToHeading(3, 500);
    hoodState = 1;
@@ -86,26 +87,26 @@ void longGoalRight() {
    chassis.moveToPoint(-1.27, 33.95, 1500, {.maxSpeed=80});
    chassis.waitUntilDone();
    intakeState = 2;
-   pros::delay(850);
+   pros::delay(950);
    intakeState = 3;
    pros::delay(250);
 
    // driving reverse to the matchload
-   chassis.moveToPoint(31.5, 4.9, 1250, {.forwards=false});
+   chassis.moveToPoint(31, 4.9, 1250, {.forwards=false});
    chassis.waitUntilDone();
    //trapdoorState = 0; //only for 4 on mid
    littleWillState = 1;
-   chassis.turnToHeading(180, 1100);
+   chassis.turnToHeading(182, 1100);
    chassis.waitUntilDone();
    intakeState = 3;
    
    // driving into the matchloader
-   chassis.moveToPoint(31.5, -10, 1500, {.maxSpeed = 100});
+   chassis.moveToPoint(31, -10, 1500, {.maxSpeed = 100});
    chassis.waitUntilDone();
    pros::delay(700);
 
    //back up from match loader
-   chassis.moveToPoint(31.5, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
+   chassis.moveToPoint(31, 0.4, 1000, {.forwards = false, .maxSpeed = 90});
    chassis.waitUntilDone();
    hoodState = 1;
    littleWillState = 0;
@@ -117,7 +118,7 @@ void longGoalRight() {
    chassis.waitUntilDone();
    chassis.moveToPoint(31.5, 16, 1500, {.maxSpeed = 60}); //og 17 (zach)
    chassis.waitUntilDone();
-   //chassis.turnToHeading(0, 500);
+   chassis.turnToHeading(-352, 500);
    intakeState = 2;
    pros::delay(100);
    hoodState = 1;
@@ -263,11 +264,11 @@ void sawp() {
     //go to match loader
     littleWillState = 1;
     intakeState = 3;
-    chassis.moveToPoint(0,27.5, 1000);
+    chassis.moveToPoint(0,27, 1000);
     chassis.turnToHeading(91, 1000);
-    chassis.moveToPoint(4, 27.5, 1000, {.minSpeed = 50});
-    chassis.moveToPoint(6, 27.5, 250);
-    pros::delay(500); //750 perfect
+    chassis.moveToPoint(4, 27, 1000, {.minSpeed = 50});
+    chassis.moveToPoint(8, 27, 500, {.maxSpeed = 20});
+    pros::delay(100); //750 perfect
 
     //go back and score long goal
     chassis.moveToPoint(-4, 30, 500, {.forwards = false, .maxSpeed = 90});
@@ -286,7 +287,7 @@ void sawp() {
     intakeState = 3;
     chassis.moveToPoint(-29.6, 2.9, 1000, {.maxSpeed = 40});
     chassis.moveToPoint(-35.5, -1.6, 1000);
-    pros::delay(250);
+    pros::delay(150);
     velValue = 12000*0.8;
     intakeState = 2;
     velValue = 12000;
@@ -304,6 +305,7 @@ void sawp() {
     chassis.turnToHeading(-45, 1000);
     intakeState = 1;
     chassis.moveToPoint(-36, -32, 1000);
+    pros::delay(100);
     trapdoorState = 1;
 
 }
